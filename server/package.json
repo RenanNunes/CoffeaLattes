@@ -1,0 +1,22 @@
+{
+  "name": "CoffeaLattes",
+  "version": "1.0.0",
+  "description": "Este é o repositório remoto do projeto de uma aplicação web para estudantes compartilharem experiências de seus estágios.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
