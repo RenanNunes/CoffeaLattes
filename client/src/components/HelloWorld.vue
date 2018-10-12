@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <h1>CoffeaLattes</h1>
+    <h1>Let's do this!</h1>
+    <img src="https://media.giphy.com/media/sYPuRkZZlS8eY/giphy.gif" alt="Dog running" />
   </div>
 </template>
 
