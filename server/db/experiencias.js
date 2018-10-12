@@ -3,10 +3,10 @@ const db = require('./connection');
 
 const schema = Joi.object().keys({
 	//formato provisorio para testes
-	usuario: Joi.string().alphanum().required(),
-	empresa: Joi.string().alphanum().required(),
+	cargo: Joi.string().alphanum().required(),
+	tipo: Joi.string().valid('semestral', 'quadrimestral', 'ferias', 'trainee', 'outro').required(),
 	salario: Joi.number().min(0),
-	opiniao: Joi.string().max(500),
+	atividades_realizadas: Joi.string().max(500),
 });
 
 const experiencias = db.get('experiencias');
