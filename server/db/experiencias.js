@@ -3,10 +3,10 @@ const db = require('./connection');
 
 const schema = Joi.object().keys({
 	//formato provisorio para testes
-	cargo: Joi.string().alphanum().required(),
-	tipo: Joi.string().valid('semestral', 'quadrimestral', 'ferias', 'trainee', 'outro').required(),
-	salario: Joi.number().min(0),
-	atividades_realizadas: Joi.string().max(500),
+	cargo: Joi.string().max(75).required().error(new Error('Cargo pode conter até 75 caracteres')),
+	tipo: Joi.string().valid('semestral', 'quadrimestral', 'ferias', 'trainee', 'outro').required().error(new Error('Ocorreu um erro no Tipo da experiência')),
+	salario: Joi.number().min(0).allow('').error(new Error('O salário deve ser um número maior ou igual a 0')),
+	atividadesRealizadas: Joi.string().max(500).allow('').error(new Error('As Atividades realizadas podem conter até 500 caracteres')),
 });
 
 const experiencias = db.get('experiencias');
@@ -18,10 +18,14 @@ function getAll() {
 function create(exp) {
 	const resultado = Joi.validate(exp, schema);
 	if (!resultado.error) {
-		exp.data_criacao = new Date();
+		exp.dataCriacao = new Date();
 		return experiencias.insert(exp);
 	} else {
-		return Promise.reject(resultado.error);
+		const erro = {
+			erro: true,
+			mensagem: resultado.error.message,
+		}
+		return Promise.reject(erro);
 	}
 }
 
