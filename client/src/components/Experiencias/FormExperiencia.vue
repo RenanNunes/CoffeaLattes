@@ -74,11 +74,11 @@ export default {
       ],
       error: '',
       success: '',
-      show: true
+      show: true,
     }
   },
   methods: {
-    async onSubmit (evt) {
+    async onSubmit(evt) {
       evt.preventDefault();
       const result = await fetch(API_URL, {
         method: 'POST',

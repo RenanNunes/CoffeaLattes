@@ -1,8 +1,8 @@
 <template>
   <div>
-  	<b-container class="form-container">
-    	<FormExperiencia />
-	</b-container>
+    <b-container class="form-container">
+      <FormExperiencia />
+  </b-container>
   </div>
 </template>
 
@@ -20,9 +20,9 @@ export default {
 
 <style>
 .form-container {
-	background-color: #f5f5f5;
-	padding: 15px;
-	border-radius: 5px;
-	margin-top: 10px;
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 10px;
 }
 </style>
