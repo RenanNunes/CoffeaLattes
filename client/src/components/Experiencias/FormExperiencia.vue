@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="form-exp">
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <h3>Conte-nos sobre sua experiência!</h3>
       <br />
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-const API_URL = process.env.API_URL || 'http://localhost:3000/experiencia';
+const API_URL = process.env.API_URL || 'http://localhost:3000';
 
 export default {
   data() {
@@ -80,7 +80,7 @@ export default {
   methods: {
     async onSubmit(evt) {
       evt.preventDefault();
-      const result = await fetch(API_URL, {
+      const result = await fetch(API_URL+'/experiencia/criar', {
         method: 'POST',
         body: JSON.stringify(this.exp),
         headers: {
@@ -120,5 +120,11 @@ export default {
 <style scoped>
 .botao-form {
   margin: 4px;
+}
+
+.form-exp {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 5px;
 }
 </style>

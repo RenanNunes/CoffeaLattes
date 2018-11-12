@@ -15,7 +15,8 @@
               <em>Experiências</em>
             </template>
             <b-dropdown-item href="/experiencias/criar">Adicionar</b-dropdown-item>
-            <b-dropdown-item href="/experiencias/listar">Buscar</b-dropdown-item>
+            <b-dropdown-item href="/experiencias/listar/busca">Buscar</b-dropdown-item>
+            <b-dropdown-item href="/experiencias/listar">Listar todos</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item href="#">Fale conosco</b-nav-item>
         </b-navbar-nav>

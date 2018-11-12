@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container class="form-container">
+    <b-container class="form-margin-exp">
       <FormExperiencia />
   </b-container>
   </div>
@@ -19,10 +19,7 @@ export default {
 </script>
 
 <style>
-.form-container {
-  background-color: #f5f5f5;
-  padding: 15px;
-  border-radius: 5px;
+.form-margin-exp {
   margin-top: 20px;
 }
 </style>
