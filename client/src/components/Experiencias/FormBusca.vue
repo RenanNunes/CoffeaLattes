@@ -2,12 +2,12 @@
   <div>
     <b-btn @click="showCollapse = !showCollapse"
            :class="showCollapse ? 'collapsed' : null"
-           aria-controls="collapse4"
+           aria-controls="collapse"
            :aria-expanded="showCollapse ? 'true' : 'false'">
-      <div v-if="showCollapse">Esconder ↑</div>
-      <div v-else>Busca ↓</div>
+      <div v-if="showCollapse">Esconder busca ↑</div>
+      <div v-else>Mostrar busca ↓</div>
     </b-btn>
-    <b-collapse class="mt-2" v-model="showCollapse" id="collapse4">
+    <b-collapse class="mt-2" v-model="showCollapse" id="collapse">
       <b-card class="form-exp">
         <b-form @submit="onSubmit" @reset="onReset" v-if="show">
           <h3>Indique os critérios de busca!</h3>
