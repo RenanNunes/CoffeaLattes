@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import CriarExperiencia from './views/CriarExperiencia.vue';
-import BuscarExperiencia from './views/BuscarExperiencia.vue';
+import ListarExperiencia from './views/ListarExperiencia.vue';
 import Erro404 from './views/Erro404.vue';
 
 Vue.use(Router);
@@ -22,8 +22,8 @@ export default new Router({
     },
     {
       path: '/experiencias/listar/:buscar?',
-      name: 'buscarExperiencia',
-      component: BuscarExperiencia,
+      name: 'listarExperiencia',
+      component: ListarExperiencia,
     },
     {
       path: '*',
