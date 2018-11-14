@@ -35,7 +35,7 @@
             <b-form-input id="salario"
                           type="number"
                           v-model="exp.salario"
-                          placeholder="Qual era seu salário?"
+                          placeholder="Salário"
                           min=0>
             </b-form-input>
           </b-form-group>

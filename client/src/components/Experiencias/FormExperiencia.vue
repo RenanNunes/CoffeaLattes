@@ -13,6 +13,16 @@
                       placeholder="Qual era sua função na empresa?">
         </b-form-input>
       </b-form-group>
+      <b-form-group id="empresaLabel"
+                    label="Empresa: *"
+                    label-for="empresa">
+        <b-form-input id="empresa"
+                      type="text"
+                      v-model="exp.empresa"
+                      required
+                      placeholder="Qual era o nome da empresa?">
+        </b-form-input>
+      </b-form-group>
       <b-form-group id="tipoLabel"
                     label="Tipo de estágio: *"
                     label-for="tipo">
@@ -32,16 +42,65 @@
                         :max-rows="6">
         </b-form-textarea>
       </b-form-group>
-      <b-form-group id="salarioLabel"
-                    label="Salário:"
-                    label-for="salario">
-        <b-form-input id="salario"
-                      type="number"
-                      v-model="exp.salario"
-                      placeholder="Qual era seu salário?"
-                      min=0>
-        </b-form-input>
-      </b-form-group>
+
+      <b-container>
+        <b-row>
+          <b-col>
+            <b-form-group id="salarioLabel"
+                          label="Salário:"
+                          label-for="salario">
+              <b-form-input id="salario"
+                            type="number"
+                            v-model="exp.salario"
+                            placeholder="Qual era seu salário?"
+                            min=0>
+              </b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col>
+            <b-form-group id="duracaoLabel"
+                          label="Duração (em meses):"
+                          label-for="duracao">
+              <b-form-input id="duracao"
+                            type="number"
+                            v-model="exp.duracao"
+                            placeholder="Quanto tempo durou/durará seu estágio?"
+                            min=1>
+              </b-form-input>
+            </b-form-group>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col><h5>Benefícios:</h5></b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <b-form-group id="VRVALabel"
+                          label="Vale refeição/Vale alimentação:"
+                          label-for="VRVA">
+              <b-form-input id="VRVA"
+                            type="number"
+                            v-model="exp.beneficios.VRVA"
+                            placeholder="Valor do VR/VA (não preencher se não houver)"
+                            min=0>
+              </b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col>
+            <b-form-group id="VTLabel"
+                          label="Vale transporte:"
+                          label-for="VT">
+              <b-form-input id="VT"
+                            type="number"
+                            v-model="exp.beneficios.VT"
+                            placeholder="Valor do vale transporte (não preencher se não existia)"
+                            min=0>
+              </b-form-input>
+            </b-form-group>
+          </b-col>
+        </b-row>
+      </b-container>
+
       <b-button type="submit" variant="primary" class="botao-form">Concluir</b-button>
       <b-button type="reset" variant="danger" class="botao-form">Limpar</b-button>
       <br />
@@ -60,9 +119,15 @@ export default {
     return {
       exp: {
         cargo: '',
+        empresa: '',
         tipo: null,
         atividadesRealizadas: '',
         salario: '',
+        duracao: '',
+        beneficios: {
+          VRVA: '',
+          VT: '',
+        },
       },
       tipos: [
         { text: 'Selecione um', value: null },
@@ -93,9 +158,15 @@ export default {
         this.success = '';
       } else {
         this.exp.cargo = '';
+        this.exp.empresa = '';
         this.exp.tipo = null;
         this.exp.atividadesRealizadas = '';
         this.exp.salario = '';
+        this.exp.duracao = '';
+        this.exp.beneficios = {
+          VRVA: '',
+          VT: '',
+        },
         this.error = '';
         this.success = true;
       }
@@ -104,9 +175,15 @@ export default {
       evt.preventDefault();
       /* Reset our exp values */
       this.exp.cargo = '';
+      this.exp.empresa = '';
       this.exp.tipo = null;
       this.exp.atividadesRealizadas = '';
       this.exp.salario = '';
+      this.exp.duracao = '';
+      this.exp.beneficios = {
+        VRVA: '',
+        VT: '',
+      },
       this.error = '';
       this.success = '';
       /* Trick to reset/clear native browser exp validation state */
