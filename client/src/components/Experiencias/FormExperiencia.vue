@@ -33,11 +33,12 @@
         </b-form-select>
       </b-form-group>
       <b-form-group id="atividadesRealizadasLabel"
-                    label="Atividades realizadas:"
+                    label="Atividades realizadas: *"
                     label-for="atividadesRealizadas">
         <b-form-textarea id="atividadesRealizadas"
                         v-model="exp.atividadesRealizadas"
                         placeholder="Descreva suas atividades realizadas"
+                        required
                         :rows="3"
                         :max-rows="6">
         </b-form-textarea>
@@ -46,13 +47,13 @@
       <b-container>
         <b-row>
           <b-col>
-            <b-form-group id="tipoPeriodo"
+            <b-form-group id="periodoLabel"
                           label="Semestre/Quadrimestre que foi contratado: *"
-                          label-for="periodo">
-              <b-form-select id="periodo"
+                          label-for="periodoContratado">
+              <b-form-select id="periodoContratado"
                             :options="periodos"
                             required
-                            v-model="exp.periodo">
+                            v-model="exp.periodoContratado">
               </b-form-select>
             </b-form-group>
           </b-col>
@@ -70,6 +71,17 @@
           </b-col>
         </b-row>
         <b-row>
+          <b-col>
+            <b-form-group id="dataEntradaLabel"
+                          label="Data de entrada na empresa:"
+                          label-for="dataEntrada">
+              <b-form-input id="dataEntrada"
+                            type="date"
+                            v-model="exp.dataEntrada"
+                            placeholder="Quando vc entrou na empresa?">
+              </b-form-input>
+            </b-form-group>
+          </b-col>
           <b-col>
             <b-form-group id="salarioLabel"
                           label="Salário:"
@@ -135,8 +147,9 @@ export default {
         empresa: '',
         tipo: null,
         atividadesRealizadas: '',
-        periodo: null,
+        periodoContratado: null,
         duracao: '',
+        dataEntrada: '',
         salario: '',
         beneficios: {
           VRVA: '',
@@ -193,8 +206,10 @@ export default {
         this.exp.empresa = '';
         this.exp.tipo = null;
         this.exp.atividadesRealizadas = '';
-        this.exp.salario = '';
+        this.exp.periodoContratado = null;
         this.exp.duracao = '';
+        this.exp.dataEntrada = '';
+        this.exp.salario = '';
         this.exp.beneficios = {
           VRVA: '',
           VT: '',
@@ -210,8 +225,10 @@ export default {
       this.exp.empresa = '';
       this.exp.tipo = null;
       this.exp.atividadesRealizadas = '';
-      this.exp.salario = '';
+      this.exp.periodoContratado = null;
       this.exp.duracao = '';
+      this.exp.dataEntrada = '';
+      this.exp.salario = '';
       this.exp.beneficios = {
         VRVA: '',
         VT: '',
