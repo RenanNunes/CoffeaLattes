@@ -46,15 +46,14 @@
       <b-container>
         <b-row>
           <b-col>
-            <b-form-group id="salarioLabel"
-                          label="Salário:"
-                          label-for="salario">
-              <b-form-input id="salario"
-                            type="number"
-                            v-model="exp.salario"
-                            placeholder="Qual era seu salário?"
-                            min=0>
-              </b-form-input>
+            <b-form-group id="tipoPeriodo"
+                          label="Semestre/Quadrimestre que foi contratado: *"
+                          label-for="periodo">
+              <b-form-select id="periodo"
+                            :options="periodos"
+                            required
+                            v-model="exp.periodo">
+              </b-form-select>
             </b-form-group>
           </b-col>
           <b-col>
@@ -71,6 +70,20 @@
           </b-col>
         </b-row>
         <b-row>
+          <b-col>
+            <b-form-group id="salarioLabel"
+                          label="Salário:"
+                          label-for="salario">
+              <b-form-input id="salario"
+                            type="number"
+                            v-model="exp.salario"
+                            placeholder="Qual era seu salário?"
+                            min=0>
+              </b-form-input>
+            </b-form-group>
+          </b-col>
+        </b-row>
+        <b-row>
           <b-col><h5>Benefícios:</h5></b-col>
         </b-row>
         <b-row>
@@ -81,7 +94,7 @@
               <b-form-input id="VRVA"
                             type="number"
                             v-model="exp.beneficios.VRVA"
-                            placeholder="Valor do VR/VA (não preencher se não houver)"
+                            placeholder="Valor do VR/VA"
                             min=0>
               </b-form-input>
             </b-form-group>
@@ -93,7 +106,7 @@
               <b-form-input id="VT"
                             type="number"
                             v-model="exp.beneficios.VT"
-                            placeholder="Valor do vale transporte (não preencher se não existia)"
+                            placeholder="Valor do vale transporte"
                             min=0>
               </b-form-input>
             </b-form-group>
@@ -122,8 +135,9 @@ export default {
         empresa: '',
         tipo: null,
         atividadesRealizadas: '',
-        salario: '',
+        periodo: null,
         duracao: '',
+        salario: '',
         beneficios: {
           VRVA: '',
           VT: '',
@@ -135,6 +149,24 @@ export default {
         { text: 'Para curso quadrimestral', value: 'quadrimestral' },
         { text: 'Estágio de férias', value: 'ferias' },
         { text: 'Trainee', value: 'trainee' },
+        { text: 'Outro', value: 'outro' },
+      ],
+      periodos: [
+        { text: 'Selecione um', value: null },
+        { text: '1º semestre', value: '1º semestre' },
+        { text: '2º semestre', value: '2º semestre' },
+        { text: '3º semestre', value: '3º semestre' },
+        { text: '4º semestre', value: '4º semestre' },
+        { text: '5º semestre', value: '5º semestre' },
+        { text: '6º semestre', value: '6º semestre' },
+        { text: '7º semestre', value: '7º semestre' },
+        { text: '8º semestre', value: '8º semestre' },
+        { text: '9º semestre', value: '9º semestre' },
+        { text: '10º semestre', value: '10º semestre' },
+        { text: '1º módulo de estágio', value: '1º modulo de estagio' },
+        { text: '2º módulo de estágio', value: '2º modulo de estagio' },
+        { text: '3º módulo de estágio', value: '3º modulo de estagio' },
+        { text: '4º módulo de estágio', value: '4º modulo de estagio' },
         { text: 'Outro', value: 'outro' },
       ],
       error: '',
