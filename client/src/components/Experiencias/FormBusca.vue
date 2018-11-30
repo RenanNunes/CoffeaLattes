@@ -39,11 +39,21 @@
                           min=0>
             </b-form-input>
           </b-form-group>
+          <b-form-group id="beneficiosLabel">
+            <h5>Benefícios</h5>
+            <b-form-checkbox id="VRVAcheckbox"
+                             v-model="exp.beneficios.VRVA">
+              Vale Refeição/Vale Alimentação
+            </b-form-checkbox>
+            <b-form-checkbox id="VTcheckbox"
+                             v-model="exp.beneficios.VT">
+              Vale Transporte
+            </b-form-checkbox>
+          </b-form-group>
           <b-button type="submit" variant="primary" class="botao-form">Concluir</b-button>
           <b-button type="reset" variant="danger" class="botao-form">Limpar</b-button>
           <br />
           <br />
-          <b-alert :show="!!success" variant="success">Obrigado por compartilhar ^^</b-alert>
           <b-alert :show="!!error" variant="warning">{{error}}</b-alert>
         </b-form>
       </b-card>
@@ -61,8 +71,11 @@ export default {
       exp: {
         cargo: '',
         tipo: null,
-        atividadesRealizadas: '',
         salario: '',
+        beneficios: {
+          VRVA: false,
+          VT: false,
+        },
       },
       tipos: [
         { text: 'Selecione um', value: null },
@@ -73,7 +86,6 @@ export default {
         { text: 'Outro', value: 'outro' },
       ],
       error: '',
-      success: '',
       show: true,
     }
   },
@@ -93,13 +105,15 @@ export default {
       const resultJSON = await result.json();
       if (resultJSON.erro) {
         this.error = resultJSON.mensagem;
-        this.success = '';
       } else {
         this.exp.cargo = '';
         this.exp.tipo = null;
         this.exp.salario = '';
+        this.exp.beneficios = {
+          VRVA: false,
+          VT: false,
+        },
         this.error = '';
-        this.success = true;
       }
     },
     onReset (evt) {
@@ -108,8 +122,11 @@ export default {
       this.exp.cargo = '';
       this.exp.tipo = null;
       this.exp.salario = '';
+      this.exp.beneficios = {
+          VRVA: '',
+          VT: '',
+        },
       this.error = '';
-      this.success = '';
       /* Trick to reset/clear native browser exp validation state */
       this.show = false;
       this.$nextTick(() => { this.show = true });
