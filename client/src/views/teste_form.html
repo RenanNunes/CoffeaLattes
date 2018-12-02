@@ -1,0 +1,88 @@
+<!--
+Um validador simples (raiz) para testar e validar as implementações de backend
+para as requisições do MongoDB.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Formulário de teste</title>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    </head>
+    <body>
+        <script>
+        const formToJSON = elements => [].reduce.call(elements, (data, element) => {
+            let elemValue;
+            if (element.type == 'checkbox')
+                elemValue = element.checked;
+            else
+                elemValue = element.value;
+            if (element.hasAttribute('data-obj')) {
+                const objName = element.getAttribute('data-obj');
+                if (data[objName] === undefined)
+                    data[objName] = {}
+                data[objName][element.name] = elemValue;
+            } else
+                data[element.name] = elemValue;
+            return data;
+        }, {});
+        
+        let sendForm = (formName, path) => {
+            let corpo = formToJSON(document[formName].elements);
+            $.ajax({
+                url: `http://192.168.1.72:3000/${path}`,
+                type: "POST",
+                data: JSON.stringify(corpo),
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (result) {
+                    window.alert(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+            });
+        }
+        </script>
+        <fieldset>
+            <legend>Criar e deletar vaga</legend>
+            <form name="form1">
+                <input type="hidden" name="empresa" value="5ba8432e1a96ba257776c7e4" />
+                <input type="text" name="cargo" placeholder="Cargo" />
+                <textarea name="descricao" placeholder="Descrição"></textarea>
+                <input type="date" name="dataCriacao" placeholder="Data de criação" />
+                <input type="date" name="dataLimite" placeholder="Data de limite" />
+                <input type="number" name="salario" placeholder="Salário" />
+                <select name="tipo">
+                    <option value="semestral">Semestral</option>
+                    <option value="quadrimestral">Quadrimestral</option>
+                    <option value="ferias">Férias</option>
+                    <option value="trainee">Trainee</option>
+                </select>
+            </form>
+            <button onclick="sendForm('form1', 'vagas/criar')">Criar</button>
+            <button onclick="sendForm('form1', 'vagas/remover')">Remover</button>
+        </fieldset>
+        <fieldset>
+            <legend>Deletar vaga por ID</legend>
+            <form name="form2">
+                <input type="text" name="_id" value="5c044851e1b9f85896262b1d" placeholder="Id" />
+            </form>
+            <button onclick="sendForm('form2', 'vagas/remover')">Remover</button>
+        </fieldset>
+        <fieldset>
+            <legend>Form3</legend>
+            <form name="form3">
+                <input type="text" name="empresa" placeholder="Empresa" />
+                <textarea name="opinioes" placeholder="Opinião"></textarea>
+                <label>Recomenda? <input type="checkbox" name="recomenda" /></label>
+                <input type="number" min="0" max="5" name="ambiente" data-obj="notas" placeholder="Nota de ambiente" />
+                <input type="number" min="0" max="5" name="aprendizado" data-obj="notas" placeholder="Nota de aprendizado" />
+                <input type="number" min="0" max="5" name="autonomia" data-obj="notas" placeholder="Nota de autonomia" />
+            </form>
+            <button onclick="sendForm('form3', 'reviews/criar')">Criar</button>
+            <button onclick="sendForm('form3', 'reviews/remover')">Remover</button>
+        </fieldset>
+    </body>
+</html>
