@@ -7,11 +7,16 @@ module.exports = function(app) {
 			message: 'HomePage'
 		});
 	});
-	app.get('/experiencias', async (req, res) => {
+	app.get('/experiencia', async (req, res) => {
 		const exp = await experiencias.getAll();
 		res.json(exp);
 	})
-	app.post('/experiencia', async (req, res) => {
+	app.post('/experiencia/buscar', async (req, res) => {
+		const exp = await experiencias.getAll();
+		res.json(exp);
+	})
+
+	app.post('/experiencia/criar', async (req, res) => {
 		try {
 			const result = await experiencias.create(req.body);
 			res.json(result);
