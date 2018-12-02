@@ -11,7 +11,7 @@ module.exports = function(app) {
 		const exp = await experiencias.getAll();
 		res.json(exp);
 	})
-	app.post('/experiencia/buscar', async (req, res) => {
+	app.get('/experiencia/buscar', async (req, res) => {
 		const exp = await experiencias.getAll();
 		res.json(exp);
 	})

@@ -19,7 +19,21 @@ const schema = Joi.object().keys({
 const experiencias = db.get('experiencias');
 
 function getAll() {
-    return experiencias.find();
+    var list = experiencias.find();
+    var res = [];
+    list.each(function(exp) {
+    	var obj = {};
+    	obj['cargo'] = 'Cientista de dados';
+    	obj['empresa'] = 'Nubank';
+    	obj['tipo'] = 'Outro';
+    	obj['salario'] = 3000.001;
+    	obj['periodoContratado'] = '4º módulo de estágio';
+    	obj['idEmpresa'] = 43;
+    	obj['idExp'] = 423;
+    	res.push(obj);
+    });
+    console.log(list)
+    return res;
 }
 
 function create(exp) {
