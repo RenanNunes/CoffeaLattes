@@ -21,19 +21,22 @@ const experiencias = db.get('experiencias');
 function getAll() {
     var list = experiencias.find();
     var res = [];
-    list.each(function(exp) {
+    return list.each(function(exp) {
     	var obj = {};
-    	obj['cargo'] = 'Cientista de dados';
-    	obj['empresa'] = 'Nubank';
-    	obj['tipo'] = 'Outro';
-    	obj['salario'] = 3000.001;
-    	obj['periodoContratado'] = '4º módulo de estágio';
-    	obj['idEmpresa'] = 43;
-    	obj['idExp'] = 423;
+    	//console.log(exp)
+    	obj['cargo'] = exp['cargo'];
+    	obj['empresa'] = exp['empresa'];
+    	obj['tipo'] = exp['tipo'];
+    	obj['salario'] = parseInt(exp['salario']);
+    	//console.log(typeof parseInt(exp['salario']));
+    	obj['periodoContratado'] = exp['periodoContratado'];
+    	obj['idEmpresa'] = 0;
+    	obj['idExp'] = exp['_id'];
     	res.push(obj);
+    }).then(() => {
+		//console.log(res);
+    	return res;
     });
-    console.log(list)
-    return res;
 }
 
 function create(exp) {

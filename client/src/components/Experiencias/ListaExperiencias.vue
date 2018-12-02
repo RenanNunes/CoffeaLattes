@@ -112,8 +112,7 @@ export default {
         },
       });
       const resultJSON = await result.json();
-      console.log(resultJSON);
-      items = resultJSON;
+      this.items = resultJSON;
     }
   }
 }
