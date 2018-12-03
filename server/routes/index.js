@@ -34,7 +34,7 @@ module.exports = function(app) {
 		res.json(emp);
 	})
 	
-	app.post('/empresa/buscar', async (req, res) => {
+	app.get('/empresa/buscar', async (req, res) => {
 		const emp = await empresas.getAll();
 		res.json(emp);
 	})
@@ -42,6 +42,16 @@ module.exports = function(app) {
 	app.post('empresa/criar', async (req, res) => {
 		try {
 			const result = await empresas.create(req.body);
+			res.json(result);
+		} catch (error) {
+			res.status(500);
+			res.json(error);
+		}
+	})
+
+	app.post('/empresa/editar', async (req, res) => {
+		try {
+			const result = await empresas.update(req.query);
 			res.json(result);
 		} catch (error) {
 			res.status(500);
