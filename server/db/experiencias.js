@@ -18,9 +18,46 @@ const schema = Joi.object().keys({
 
 const experiencias = db.get('experiencias');
 
+function search(req) {
+	if (req.query['id'] !== undefined){
+		return getOne(req.query['id']);
+	}
+	else if (req._body){
+		return getFilter(req.body);
+	}
+	else {
+		return getAll();
+	}
+}
+
 function getAll() {
     var list = experiencias.find();
-    var res = [];
+    return prepareToFrontEndList(list);
+}
+
+function getFilter(body) {
+	query = {};
+	if (body['tipo'] !== undefined){
+		query['tipo'] = body['tipo'];
+	}
+	if (body['cargo'] !== undefined){
+		query['cargo'] = new RegExp(body['cargo'], 'i');
+	}
+	if (body['salario'] !== undefined){
+		query['salario'] = {'$gte': body['salario']};
+	}
+	if (body['VRVA'] === true){
+		query['beneficios.VRVA'] = {"$exists" : true, "$ne" : ""};
+	}
+	if (body['VT'] === true){
+		query['beneficios.VT'] = {"$exists" : true, "$ne" : ""};
+	}
+	var list = experiencias.find(query);
+    return prepareToFrontEndList(list);
+}
+
+function prepareToFrontEndList(list) {
+	var res = [];
     return list.each(function(exp) {
     	var obj = {};
     	//console.log(exp)
@@ -37,6 +74,9 @@ function getAll() {
 		//console.log(res);
     	return res;
     });
+
+function getOne(id) {
+	return experiencias.findOne({_id: id});
 }
 
 function create(exp) {
@@ -54,4 +94,11 @@ function create(exp) {
 	}
 }
 
-module.exports = { getAll, create };
+function remove(req) {
+	if (req.query['id'] === undefined){
+		throw "Não pode deletar sem um id";
+	}
+	return experiencias.remove({_id: req.query['id']});
+}
+
+module.exports = { search, getAll, getOne, create, remove };
