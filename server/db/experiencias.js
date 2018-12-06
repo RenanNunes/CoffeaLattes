@@ -4,7 +4,7 @@ const db = require('./connection');
 const schema = Joi.object().keys({
 	cargo: Joi.string().max(75).required().error(new Error('Cargo pode conter até 75 caracteres')),
 	empresa: Joi.string().max(75).required().error(new Error('Empresa pode conter até 75 caracteres')),
-	tipo: Joi.string().valid('semestral', 'quadrimestral', 'ferias', 'trainee', 'outros').required().error(new Error('Ocorreu um erro no Tipo da experiência')),
+	tipo: Joi.string().valid('semestral', 'quadrimestral', 'ferias', 'trainee', 'outro').required().error(new Error('Ocorreu um erro no Tipo da experiência')),
 	atividadesRealizadas: Joi.string().max(500).required().error(new Error('As Atividades realizadas podem conter até 500 caracteres')),
 	periodoContratado: Joi.string().required().error(new Error('Ocorreu um erro no Período contratado')),
 	duracao: Joi.number().min(0).integer().allow('').error(new Error('A Duracao deve ser o número de meses arredondado')),
