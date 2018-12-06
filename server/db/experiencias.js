@@ -19,14 +19,14 @@ const schema = Joi.object().keys({
 const experiencias = db.get('experiencias');
 
 function search(req) {
-	if (req.query && req.query['id']){
-		return getOne(req.query['id']);
-	}
-	else if (req._body){
-		return getFilter(req.body);
-	}
-	else {
+	if (!req.query){
 		return getAll();
+	} else {
+		if (req.query['id']) {
+			return getOne(req.query['id']);
+		} else {
+			return getFilter(req.query)
+		}
 	}
 }
 
@@ -35,21 +35,21 @@ function getAll() {
     return prepareToFrontEndList(list);
 }
 
-function getFilter(body) {
+function getFilter(params) {
 	query = {};
-	if (body['tipo']){
-		query['tipo'] = body['tipo'];
+	if (params['tipo']){
+		query['tipo'] = params['tipo'];
 	}
-	if (body['cargo']){
-		query['cargo'] = new RegExp(body['cargo'], 'i');
+	if (params['cargo']){
+		query['cargo'] = new RegExp(params['cargo'], 'i');
 	}
-	if (body['salario']){
-		query['salario'] = {'$gte': body['salario']};
+	if (params['salario']){
+		query['salario'] = {'$gte': params['salario']};
 	}
-	if (body['VRVA']){
+	if (params['VRVA']){
 		query['beneficios.VRVA'] = {"$exists" : true, "$ne" : ""};
 	}
-	if (body['VT']){
+	if (params['VT']){
 		query['beneficios.VT'] = {"$exists" : true, "$ne" : ""};
 	}
 	var list = experiencias.find(query);
