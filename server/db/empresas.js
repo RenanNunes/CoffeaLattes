@@ -44,4 +44,4 @@ function remove(emp){
     return empresas.remove(emp);
 }
 
-module.exports = { getAll, create, update, remove };
+module.exports = { getAll, create, /*update,*/ remove };
