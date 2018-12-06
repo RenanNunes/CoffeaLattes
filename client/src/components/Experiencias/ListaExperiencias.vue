@@ -7,7 +7,7 @@
         </a>
       </template>
       <template slot="detalhes" slot-scope="data">
-        <a :href="`#${data.item.idExp}`">
+        <a :href="`/experiencia/detalhar/${data.item.idExp}`">
           Detalhes
         </a>
       </template>
