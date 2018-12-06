@@ -79,10 +79,6 @@ function getOne(id) {
 	return experiencias.findOne({_id: id});
 }
 
-function getOne(id) {
-	return experiencias.findOne({_id: id});
-}
-
 function create(exp) {
 	//depois de fazer a lógica de criação de empresa, será necessário adicionar a lógica aqui para linkar com a experiência
 	const resultado = Joi.validate(exp, schema);
