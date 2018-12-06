@@ -74,6 +74,7 @@ function prepareToFrontEndList(list) {
 		//console.log(res);
     	return res;
     });
+}
 
 function getOne(id) {
 	return experiencias.findOne({_id: id});
