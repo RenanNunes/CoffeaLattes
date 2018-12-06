@@ -2,7 +2,7 @@ const Joi = require('joi')
 const db = require('./connection');
 
 const schema = Joi.object().keys({
-    nome: Joi.string().max(75).required().error(new Error('Nome da empresa pode conter até 75 caracteres')),
+    nome: Joi.string().min(1).max(75).required().error(new Error('Nome da empresa deve conter entre 1 e 75 caracteres')),
     localidades: Joi.array().items(
         Joi.string().max(100).error(new Error('Cada localidade da empresa pode conter até 100 caracteres'))
         ).error(new Error('A empresa precisa ter ao menos uma localidade')),
@@ -18,13 +18,13 @@ const schema = Joi.object().keys({
 
 const empresas = db.get('empresas');
 
-function getAll() {
-    return empresas.find();
+function getAll(emp) {
+    return empresas.find(emp);
 }
 
 function create(emp) {
 	//depois de fazer a lógica de criação de empresa, será necessário adicionar a lógica aqui para linkar com a experiência
-	const resultado = Joi.validate(emp, schema);
+    const resultado = Joi.validate(emp, schema);
 	if (!resultado.error) {
 		return empresas.insert(emp);
 	} else {
@@ -35,20 +35,11 @@ function create(emp) {
 		return Promise.reject(erro);
 	}
 }
-
+/*
 function update(emp){
-    //const resultado = Joi.validate(emp, schema);
-    if(!resultado.error) {
         return empresas.updateOne({_id: emp.body["id"]});
-    } else {
-        const erro = {
-            erro: true,
-            mensagem: resultado.error.message,
-        }
-        return Promise.reject(erro);
-     }
 }
-
+*/
 function remove(emp){
     return empresas.remove(emp);
 }
