@@ -106,7 +106,6 @@ export default {
       /*evt.preventDefault();*/
       const result = await fetch(API_URL+'/experiencia/buscar', {
         method: 'GET',
-        body: JSON.stringify(this.exp),
         headers: {
           'content-type': 'application/json',
         },

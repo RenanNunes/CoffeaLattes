@@ -27,7 +27,7 @@ export default new Router({
       component: ListarExperiencia,
     },
     {
-      path: '/experiencia/detalhar',
+      path: '/experiencia/detalhar/:id',
       name: 'detalharExperiencia',
       component: DetalharExperiencia,
     },
