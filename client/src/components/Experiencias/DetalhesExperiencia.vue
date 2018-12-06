@@ -7,19 +7,19 @@
     </p>
     <b-container>
       <b-row>
-        <b-col>
-          <b>Tipo de estágio:</b> {{exp.tipo}}
+        <b-col v-if="exp.tipo">
+          <b>Tipo de estágio:</b> {{exp.tipo.substr(0,1).toUpperCase()}}{{exp.tipo.substr(1)}}
         </b-col>
-        <b-col>
-          <b>Período que foi contratado:</b> {{exp.periodoContratado}}
+        <b-col v-if="exp.periodoContratado">
+          <b>Período que foi contratado:</b> {{exp.periodoContratado.replace('modulo', 'módulo').replace('estagio', 'estágio')}}
         </b-col>
       </b-row>
       <b-row>
-        <b-col>
-          <b>Tempo de estágio:</b> {{exp.duracao}} meses
-        </b-col>
-        <b-col>
+        <b-col v-if="exp.dataEntrada">
           <b>Data de entrada:</b> {{exp.dataEntrada}}
+        </b-col>
+        <b-col v-if="exp.duracao">
+          <b>Tempo de estágio:</b> {{exp.duracao}} meses
         </b-col>
       </b-row>
     </b-container>
@@ -28,13 +28,19 @@
     <b-container>
       <b-row>
         <b-col>
-          <b>Salário:</b> {{exp.salario}} reais
+          <b>Salário:</b>{{' '}}
+          <span v-if="exp.salario">{{exp.salario}} reais</span>
+          <span v-else>Não informado</span>
         </b-col>
         <b-col>
-          <b>Vale alimentação/refeição:</b> {{exp.beneficios.VRVA}}
+          <b>Vale alimentação/refeição:</b>{{' '}}
+          <span v-if="exp.beneficios.VRVA">{{exp.beneficios.VRVA}}</span>
+          <span v-else>Não informado</span>
         </b-col>
         <b-col>
-          <b>Vale transporte:</b> {{exp.beneficios.VT}}
+          <b>Vale transporte:</b>{{' '}}
+          <span v-if="exp.beneficios.VT">{{exp.beneficios.VT}}</span>
+          <span v-else>Não informado</span>
         </b-col>
       </b-row>
     </b-container>
@@ -56,11 +62,11 @@ export default {
         atividadesRealizadas: 'Realizava altas reuniões com um bocado de gente daora e importante. Sempre com clima descontraído e linguagem coloquial',
         periodoContratado: '1º modulo de estagio',
         duracao: 4,
-        dataEntrada: '2012-12-12',
-        salario: 2114,
+        dataEntrada: '12/12/2012',
+        salario: 0,
         beneficios: {
-          VRVA: 100,
-          VT: 50,
+          VRVA: 0,
+          VT: 0,
         },
       },
     }
