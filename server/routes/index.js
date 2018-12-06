@@ -35,13 +35,13 @@ module.exports = function(app) {
 	})
 	
 	app.get('/empresa/buscar', async (req, res) => {
-		const emp = await empresas.getAll();
+		const emp = await empresas.getAll(req.query);
 		res.json(emp);
 	})
 
-	app.post('empresa/criar', async (req, res) => {
+	app.post('/empresa/criar', async (req, res) => {
 		try {
-			const result = await empresas.create(req.body);
+			const result = await empresas.create(req.query);
 			res.json(result);
 		} catch (error) {
 			res.status(500);
