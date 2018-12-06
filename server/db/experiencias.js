@@ -71,7 +71,6 @@ function prepareToFrontEndList(list) {
     	obj['idExp'] = exp['_id'];
     	res.push(obj);
     }).then(() => {
-		//console.log(res);
     	return res;
     });
 
