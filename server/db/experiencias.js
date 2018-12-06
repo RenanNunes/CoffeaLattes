@@ -19,7 +19,7 @@ const schema = Joi.object().keys({
 const experiencias = db.get('experiencias');
 
 function search(req) {
-	if (req.query['id'] !== undefined){
+	if (req.query && req.query['id']){
 		return getOne(req.query['id']);
 	}
 	else if (req._body){
@@ -37,19 +37,19 @@ function getAll() {
 
 function getFilter(body) {
 	query = {};
-	if (body['tipo'] !== undefined){
+	if (body['tipo']){
 		query['tipo'] = body['tipo'];
 	}
-	if (body['cargo'] !== undefined){
+	if (body['cargo']){
 		query['cargo'] = new RegExp(body['cargo'], 'i');
 	}
-	if (body['salario'] !== undefined){
+	if (body['salario']){
 		query['salario'] = {'$gte': body['salario']};
 	}
-	if (body['VRVA'] === true){
+	if (body['VRVA']){
 		query['beneficios.VRVA'] = {"$exists" : true, "$ne" : ""};
 	}
-	if (body['VT'] === true){
+	if (body['VT']){
 		query['beneficios.VT'] = {"$exists" : true, "$ne" : ""};
 	}
 	var list = experiencias.find(query);
@@ -95,7 +95,7 @@ function create(exp) {
 }
 
 function remove(req) {
-	if (req.query['id'] === undefined){
+	if (!req.query['id']){
 		throw "Não pode deletar sem um id";
 	}
 	return experiencias.remove({_id: req.query['id']});
