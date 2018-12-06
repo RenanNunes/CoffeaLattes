@@ -31,7 +31,7 @@ export default {
       },
     });
     const resultJSON = await result.json();
-    if (resultJSON._id) {
+    if (resultJSON && resultJSON._id) {
       this.exp = resultJSON;
     } else {
       this.exp = {

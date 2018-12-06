@@ -50,12 +50,21 @@
           </b-col>
         </b-row>
       </b-container>
+      <hr />
+      <b-button @click="showModal" variant="danger" class="botao-form">Apagar</b-button>
+      <b-modal ref="myModalRef" hide-footer title="Apagar">
+        <div class="d-block text-center">
+          <h4>Tem certeza que deseja apagar a experiência?</h4>
+        </div>
+        <b-btn class="mt-3" variant="outline-danger" block @click="apagar">Apagar</b-btn>
+      </b-modal>
     </div>
   </div>
 </template>
 
 <script>
-// utils com função para deixar apenas a primeira letra maiuscula(?)
+const API_URL = process.env.API_URL || 'http://localhost:3000';
+
 export default {
   props: {
       exp: {
@@ -63,6 +72,20 @@ export default {
         required: true,
       }
   },
+  methods: {
+    showModal () {
+      this.$refs.myModalRef.show()
+    },
+    apagar() {
+      const id = this.exp && this.exp._id;
+      fetch(API_URL + '/experiencia/apagar?id=' + id, {
+        method: 'DELETE',
+        headers: {
+          'content-type': 'application/json',
+        },
+      }).then(() => this.$router.push({ name: 'listarExperiencias' }));
+    }
+  }
 }
 </script>
 

@@ -42,7 +42,11 @@ export default {
           label: 'Salário',
           sortable: true,
           formatter: (value) => {
-            return 'R$'+value.toFixed(2);
+            if (value){
+              return 'R$'+value.toFixed(2);
+            } else {
+              return '-';
+            }
           },
         },{
           key: 'periodoContratado',

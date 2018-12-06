@@ -23,7 +23,7 @@ export default new Router({
     },
     {
       path: '/experiencias/listar/:buscar?',
-      name: 'listarExperiencia',
+      name: 'listarExperiencias',
       component: ListarExperiencia,
     },
     {
