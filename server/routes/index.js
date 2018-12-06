@@ -1,6 +1,7 @@
 const experiencias = require('../db/experiencias.js');
 const vagas = require('../db/vagas.js');
 const reviews = require('../db/reviews.js');
+const usuarios = require('../db/usuarios.js');
 
 module.exports = function(app) {
 
@@ -9,14 +10,21 @@ module.exports = function(app) {
 			message: 'HomePage'
 		});
 	});
+
 	app.get('/experiencia', async (req, res) => {
-		const exp = await experiencias.getAll();
-		res.json(exp);
-	})
+		try	{
+			const exp = await experiencias.getAll();
+			res.json(exp);
+		} catch (error) {
+			res.status(500);
+			res.json(error);
+		}
+	});
+
 	app.get('/experiencia/buscar', async (req, res) => {
 		const exp = await experiencias.getAll();
 		res.json(exp);
-	})
+	});
 
 	app.post('/experiencia/criar', async (req, res) => {
 		try {
@@ -71,6 +79,16 @@ module.exports = function(app) {
 	app.post('/reviews/remover', async (req, res) => {
 		try {
 			const result = await reviews.remove(req.body);
+			res.json(result);
+		} catch (error) {
+			res.status(500);
+			res.json(error);
+		}
+	});
+
+	app.get('/usuarios', async (req, res) => {
+		try {
+			const result = await usuarios.getAll();
 			res.json(result);
 		} catch (error) {
 			res.status(500);
