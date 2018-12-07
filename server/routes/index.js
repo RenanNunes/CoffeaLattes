@@ -95,4 +95,14 @@ module.exports = function(app) {
 			res.json(error);
 		}
 	});
+
+	app.post('/usuarios/criar', async (req, res) => {
+		try {
+			const result = await usuarios.create(req.body);
+			res.json(result);
+		} catch (error) {
+			res.status(500);
+			res.json(error);
+		}
+	});
 }
