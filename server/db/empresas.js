@@ -23,23 +23,26 @@ function getAll(emp) {
 }
 
 function create(emp) {
-	//depois de fazer a lógica de criação de empresa, será necessário adicionar a lógica aqui para linkar com a experiência
+  //depois de fazer a lógica de criação de empresa, será necessário adicionar a lógica aqui para linkar com a experiência
     const resultado = Joi.validate(emp, schema);
-	if (!resultado.error) {
-		return empresas.insert(emp);
-	} else {
-		const erro = {
-			erro: true,
-			mensagem: resultado.error.message,
-		}
-		return Promise.reject(erro);
-	}
+  if (!resultado.error) {
+    return empresas.insert(emp);
+  } else {
+    const erro = {
+      erro: true,
+      mensagem: resultado.error.message,
+    }
+    return Promise.reject(erro);
+  }
 }
-/*
+
 function update(emp){
-        return empresas.updateOne({_id: emp.body["id"]});
+    console.log(emp);
+    id = emp["_id"];
+    delete emp["_id"];
+    return empresas.update({"_id": id}, emp);
 }
-*/
+
 function remove(emp){
     return empresas.remove(emp);
 }
