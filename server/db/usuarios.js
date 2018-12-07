@@ -15,12 +15,25 @@ const tipoUsuarioEnum = {
 
 const usuarios = db.get('usuarios');
 
+function search(req) {
+	if (req.query && req.query['id']) {
+		return getOne(req.query['id']);
+	} 
+	else {
+		return getAll();
+	}
+}
+
 function getAll() {
 	return usuarios.find();	
 }
 
+function getOne(id) {
+	console.log(id);
+	return usuarios.findOne({"_id": id});;	
+}
+
 function create(usuario) {
-	console.log(usuario);
 	const resultado = Joi.validate(usuario, schema);
 	if (!resultado.error) {
 		agora = new Date();
@@ -37,4 +50,15 @@ function create(usuario) {
 	}
 } 
 
-module.exports = { getAll, create};
+function update(usuario) {
+
+}
+
+function remove(req) {
+	if (!req.query['id']){
+		throw "Não pode deletar sem um id";
+	}
+	return usuarios.remove({"_id": req.query['id']});
+}
+
+module.exports = { getAll, create, search, remove, update};

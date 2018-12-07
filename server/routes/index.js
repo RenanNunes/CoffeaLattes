@@ -96,9 +96,39 @@ module.exports = function(app) {
 		}
 	});
 
+	app.get('/usuarios/buscar', async(req, res) => {
+		try{
+			const result = await usuarios.search(req);
+			res.json(result);
+		} catch (error) {
+			res.status(500);
+			res.json(error);
+		}
+	})
+
 	app.post('/usuarios/criar', async (req, res) => {
 		try {
 			const result = await usuarios.create(req.body);
+			res.json(result);
+		} catch (error) {
+			res.status(500);
+			res.json(error);
+		}
+	});
+
+	app.post('/usuarios/editar', async (req, res) => {
+		try {
+			const result = await usuarios.update(req.body);
+			res.json(result);
+		} catch (error) {
+			res.status(500);
+			res.json(error);
+		}
+	});
+
+	app.delete('/usuarios/remover', async (req, res) => {
+		try {
+			const result = await usuarios.remove(req);
 			res.json(result);
 		} catch (error) {
 			res.status(500);
