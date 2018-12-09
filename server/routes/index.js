@@ -116,7 +116,7 @@ module.exports = function(app) {
 		}
 	});
 
-	app.post('/usuarios/editar', async (req, res) => {
+	app.put('/usuarios/editar', async (req, res) => {
 		try {
 			const result = await usuarios.update(req.body);
 			res.json(result);
@@ -129,6 +129,16 @@ module.exports = function(app) {
 	app.delete('/usuarios/remover', async (req, res) => {
 		try {
 			const result = await usuarios.remove(req);
+			res.json(result);
+		} catch (error) {
+			res.status(500);
+			res.json(error);
+		}
+	});
+
+	app.post('/usuarios/login', async (req, res) => {
+		try {
+			const result = await usuarios.login(req);
 			res.json(result);
 		} catch (error) {
 			res.status(500);
