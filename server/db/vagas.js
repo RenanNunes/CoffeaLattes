@@ -5,7 +5,6 @@ const schema = Joi.object().keys({
     empresa: Joi.string().max(75).required().error(new Error('Empresa pode conter até 75 caracteres')),
     cargo: Joi.string().max(75).required().error(new Error('Cargo pode conter até 75 caracteres')),
     descricao: Joi.string().required().error(new Error('Necessário inserir descrição')),
-    dataCriacao: Joi.date().max('now').required().error(new Error('Data de criação inválida')),
     dataLimite: Joi.date().required().error(new Error('Data limite necessária')),
     salario: Joi.number().min(0).precision(2).allow('').error(new Error('O salário deve ser um número maior ou igual a 0')),
     beneficios: Joi.object().keys({

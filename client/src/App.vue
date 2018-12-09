@@ -18,6 +18,14 @@
             <b-dropdown-item href="/experiencias/listar/busca">Buscar</b-dropdown-item>
             <b-dropdown-item href="/experiencias/listar">Listar todos</b-dropdown-item>
           </b-nav-item-dropdown>
+          <b-nav-item-dropdown right>
+            <!-- Using button-content slot -->
+            <template slot="button-content">
+              <em>Vagas</em>
+            </template>
+            <b-dropdown-item href="/vagas/criar">Adicionar</b-dropdown-item>
+            <b-dropdown-item href="/vagas/listar">Listar todos</b-dropdown-item>
+          </b-nav-item-dropdown>
           <b-nav-item href="#">Fale conosco</b-nav-item>
         </b-navbar-nav>
 
