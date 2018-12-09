@@ -2,6 +2,7 @@ const experiencias = require('../db/experiencias.js');
 const vagas = require('../db/vagas.js');
 const reviews = require('../db/reviews.js');
 const usuarios = require('../db/usuarios.js');
+const empresas = require('../db/empresas.js');
 
 module.exports = function(app) {
 
@@ -22,9 +23,24 @@ module.exports = function(app) {
 	});
 
 	app.get('/experiencia/buscar', async (req, res) => {
-		const exp = await experiencias.getAll();
-		res.json(exp);
-	});
+		try{
+			const exp = await experiencias.search(req);
+			res.json(exp);
+		} catch (error) {
+			res.status(500);
+			res.json(error);
+		}
+	})
+
+	app.delete('/experiencia/apagar', async (req, res) => {
+		try {
+			const result = await experiencias.remove(req);
+			res.json(result);
+		} catch (error) {
+			res.status(500);
+			res.json(error);
+		}
+	})
 
 	app.post('/experiencia/criar', async (req, res) => {
 		try {
@@ -34,7 +50,7 @@ module.exports = function(app) {
 			res.status(500);
 			res.json(error);
 		}
-	})
+	});
 
 	app.get('/vagas', async (req, res) => {
 		const vgs = await vagas.getAll();
@@ -75,10 +91,40 @@ module.exports = function(app) {
 			res.json(error);
 		}
 	});
+
+	app.get('/empresa', async (req, res)=> {
+		const emp = await empresas.getAll();
+		res.json(emp);
+	})
+	
+	app.get('/empresa/buscar', async (req, res) => {
+		const emp = await empresas.getAll(req.query);
+		res.json(emp);
+	})
+
+	app.post('/empresa/criar', async (req, res) => {
+		try {
+			const result = await empresas.create(req.query);
+			res.json(result);
+		} catch (error) {
+			res.status(500);
+			res.json(error);
+		}
+	});
 	
 	app.post('/reviews/remover', async (req, res) => {
 		try {
 			const result = await reviews.remove(req.body);
+			res.json(result);
+		} catch (error) {
+			res.status(500);
+			res.json(error);
+		}
+	})
+
+	app.post('/empresa/editar', async (req, res) => {
+		try {
+			const result = await empresas.update(req.query);
 			res.json(result);
 		} catch (error) {
 			res.status(500);

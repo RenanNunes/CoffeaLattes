@@ -4,7 +4,7 @@ const db = require('./connection');
 const schema = Joi.object().keys({
 	cargo: Joi.string().max(75).required().error(new Error('Cargo pode conter até 75 caracteres')),
 	empresa: Joi.string().max(75).required().error(new Error('Empresa pode conter até 75 caracteres')),
-	tipo: Joi.string().valid('semestral', 'quadrimestral', 'ferias', 'trainee', 'outros').required().error(new Error('Ocorreu um erro no Tipo da experiência')),
+	tipo: Joi.string().valid('semestral', 'quadrimestral', 'ferias', 'trainee', 'outro').required().error(new Error('Ocorreu um erro no Tipo da experiência')),
 	atividadesRealizadas: Joi.string().max(500).required().error(new Error('As Atividades realizadas podem conter até 500 caracteres')),
 	periodoContratado: Joi.string().required().error(new Error('Ocorreu um erro no Período contratado')),
 	duracao: Joi.number().min(0).integer().allow('').error(new Error('A Duracao deve ser o número de meses arredondado')),
@@ -18,9 +18,46 @@ const schema = Joi.object().keys({
 
 const experiencias = db.get('experiencias');
 
+function search(req) {
+	if (!req.query){
+		return getAll();
+	} else {
+		if (req.query['id']) {
+			return getOne(req.query['id']);
+		} else {
+			return getFilter(req.query)
+		}
+	}
+}
+
 function getAll() {
     var list = experiencias.find();
-    var res = [];
+    return prepareToFrontEndList(list);
+}
+
+function getFilter(params) {
+	query = {};
+	if (params['tipo']){
+		query['tipo'] = params['tipo'];
+	}
+	if (params['cargo']){
+		query['cargo'] = new RegExp(params['cargo'], 'i');
+	}
+	if (params['salario']){
+		query['salario'] = {'$gte': params['salario']};
+	}
+	if (params['VRVA']){
+		query['beneficios.VRVA'] = {"$exists" : true, "$ne" : ""};
+	}
+	if (params['VT']){
+		query['beneficios.VT'] = {"$exists" : true, "$ne" : ""};
+	}
+	var list = experiencias.find(query);
+    return prepareToFrontEndList(list);
+}
+
+function prepareToFrontEndList(list) {
+	var res = [];
     return list.each(function(exp) {
     	var obj = {};
     	//console.log(exp)
@@ -34,9 +71,12 @@ function getAll() {
     	obj['idExp'] = exp['_id'];
     	res.push(obj);
     }).then(() => {
-		//console.log(res);
     	return res;
     });
+}
+
+function getOne(id) {
+	return experiencias.findOne({_id: id});
 }
 
 function create(exp) {
@@ -54,4 +94,11 @@ function create(exp) {
 	}
 }
 
-module.exports = { getAll, create };
+function remove(req) {
+	if (!req.query['id']){
+		throw "Não pode deletar sem um id";
+	}
+	return experiencias.remove({_id: req.query['id']});
+}
+
+module.exports = { search, getAll, getOne, create, remove };
