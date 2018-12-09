@@ -32,7 +32,15 @@
           <b-col><b>Vale transporte:</b></b-col>
           <b-col>{{ row.item.beneficios.VT }}</b-col>
         </b-row>
-        <b-button size="sm" @click="row.toggleDetails">Hide Details</b-button>
+        <b-row align-h="end">
+          <b-button @click="showModal" variant="danger" align-h="end" class="apaga-vaga">Apagar</b-button>
+        </b-row>
+        <b-modal ref="myModalRef" hide-footer title="Apagar">
+          <div class="d-block text-center">
+            <h4>Tem certeza que deseja apagar a vaga?</h4>
+          </div>
+          <b-btn class="mt-3" variant="outline-danger" block @click="apagar(row.item)">Apagar</b-btn>
+        </b-modal>
       </b-card>
     </template>
     </b-table>
@@ -88,7 +96,30 @@ export default {
       });
       const resultJSON = await result.json();
       this.items = resultJSON;
+    },
+    showModal () {
+      this.$refs.myModalRef.show()
+    },
+    async apagar(vaga) {
+      const result = await fetch(API_URL + '/vagas/apagar', {
+        method: 'DELETE',
+        body: JSON.stringify({
+          "_id": vaga._id
+        }),
+        headers: {
+          'content-type': 'application/json',
+        },
+      });
+      const index = this.items.findIndex(item => item._id === vaga._id);
+      if (index > -1)
+        this.items.splice(index, 1);
     }
   }
 }
 </script>
+
+<style>
+.apaga-vaga {
+  margin-right: 5px;
+}
+</style>
