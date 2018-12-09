@@ -216,6 +216,8 @@ export default {
         },
         this.error = '';
         this.success = true;
+        const rota = '/reviews/criar/' + resultJSON._id + '/' + resultJSON.empresa;
+        this.$router.push({ path: rota });
       }
     },
     onReset (evt) {
