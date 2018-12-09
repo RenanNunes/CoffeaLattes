@@ -85,12 +85,7 @@ async function login(req) {
 	if (!req._body || !req.body["email"] || !req.body["senha"]){
 		throw "Autenticação falhou.";
 	}
-	usuario = await usuarios.findOne({"email": req.body["email"]});
-	if (usuario["senha"] === req.body["senha"]){
-		await usuarios.update({"_id": usuario._id}, { $set: {"ultimoAcesso": new Date()}});
-		return usuario; 
-	}
-	return false;
+	return await usuarios.findOneAndUpdate({"email": req.body["email"], "senha":req.body["senha"]}, { $set: {"ultimoAcesso": new Date()}});
 }
 
 module.exports = { getAll, create, search, remove, update, login};
