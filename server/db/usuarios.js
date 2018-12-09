@@ -20,7 +20,7 @@ const tipoUsuarioEnum = {
 	admin: 1
 }
 
-const usuarios = db.get('usuarios');
+const usuarios = db.collection('usuarios');
 
 function search(req) {
 	if (req.query && req.query['id']) {
@@ -32,11 +32,13 @@ function search(req) {
 }
 
 function getAll() {
-	return usuarios.find();	
+	return usuarios.find({},
+						 {"senha": 0 });	
 }
 
 function getOne(id) {
-	return usuarios.findOne({"_id": id});;	
+	return usuarios.findOne({"_id": id},
+                  			{"senha": 0 });;	
 }
 
 function create(usuario) {
@@ -85,7 +87,9 @@ async function login(req) {
 	if (!req._body || !req.body["email"] || !req.body["senha"]){
 		throw "Autenticação falhou.";
 	}
-	return await usuarios.findOneAndUpdate({"email": req.body["email"], "senha":req.body["senha"]}, { $set: {"ultimoAcesso": new Date()}});
+	return await usuarios.findOneAndUpdate ({ "email": req.body["email"], "senha":req.body["senha"]}, 
+											{ $set: {"ultimoAcesso": new Date()}},
+											{ projection : {"senha": 0}});
 }
 
 module.exports = { getAll, create, search, remove, update, login};
