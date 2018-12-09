@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container class="form-margin-exp">
+    <b-container class="form-margin-vaga">
       <FormVaga />
   </b-container>
   </div>
@@ -11,7 +11,7 @@
 import FormVaga from '@/components/Vagas/FormVaga.vue';
 
 export default {
-  name: 'novaExperiencia',
+  name: 'novaVaga',
   components: {
     FormVaga,
   },
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style>
-.form-margin-exp {
+.form-margin-vaga {
   margin-top: 20px;
 }
 </style>

@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import CriarExperiencia from './views/CriarExperiencia.vue';
 import ListarExperiencia from './views/ListarExperiencia.vue';
 import CriarVaga from './views/CriarVaga.vue';
+import ListarVaga from './views/ListarVaga.vue';
 import Erro404 from './views/Erro404.vue';
 
 Vue.use(Router);
@@ -28,13 +29,13 @@ export default new Router({
     },
     {
       path: '/vagas/criar',
-      name: 'novaExperiencia',
+      name: 'novaVaga',
       component: CriarVaga,
     },
     {
       path: '/vagas/listar',
-      name: 'listarExperiencia',
-      component: ListarExperiencia,
+      name: 'listarVaga',
+      component: ListarVaga,
     },
     {
       path: '*',
