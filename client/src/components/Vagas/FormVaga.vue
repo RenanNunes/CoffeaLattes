@@ -48,11 +48,12 @@
         <b-row>
           <b-col>
             <b-form-group id="dataLimiteLabel"
-                          label="Data máxima de inscrição para a vaga:"
+                          label="Data máxima de inscrição para a vaga: *"
                           label-for="dataLimite">
               <b-form-input id="dataLimite"
                             type="date"
                             v-model="vaga.dataLimite"
+                            required
                             placeholder="Até quando a vaga é válida?">
               </b-form-input>
             </b-form-group>
