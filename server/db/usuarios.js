@@ -58,8 +58,8 @@ function create(usuario) {
 	}
 } 
 
-function update(usuario) {
-	if (!req.query['id']){
+async function update(usuario) {
+	if (!usuario['id']){
 		throw "Não pode deletar sem um id";
 	}
 	id = usuario["id"];
