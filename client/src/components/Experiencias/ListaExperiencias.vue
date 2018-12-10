@@ -7,7 +7,7 @@
         </a>
       </template>
       <template slot="detalhes" slot-scope="data">
-        <a :href="`#${data.item.idExp}`">
+        <a :href="`/experiencia/detalhar/${data.item.idExp}`">
           Detalhes
         </a>
       </template>
@@ -42,7 +42,11 @@ export default {
           label: 'Salário',
           sortable: true,
           formatter: (value) => {
-            return 'R$'+value.toFixed(2);
+            if (value){
+              return 'R$'+value.toFixed(2);
+            } else {
+              return '-';
+            }
           },
         },{
           key: 'periodoContratado',
@@ -106,7 +110,6 @@ export default {
       /*evt.preventDefault();*/
       const result = await fetch(API_URL+'/experiencia/buscar', {
         method: 'GET',
-        body: JSON.stringify(this.exp),
         headers: {
           'content-type': 'application/json',
         },
