@@ -109,9 +109,13 @@ export default {
   methods: {
     async onSubmit(evt) {
       evt.preventDefault();
+      const message = {
+        exp: this.exp,
+        review: this.review,
+      }
       const result = await fetch(API_URL+'/reviews/criar', {
         method: 'POST',
-        body: JSON.stringify(this.review),
+        body: JSON.stringify(message),
         headers: {
           'content-type': 'application/json',
         },

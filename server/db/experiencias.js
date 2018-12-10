@@ -1,5 +1,6 @@
 const Joi = require('joi')
 const db = require('./connection');
+const ObjectID = require('mongodb').ObjectID;
 
 const schema = Joi.object().keys({
 	cargo: Joi.string().max(75).required().error(new Error('Cargo pode conter até 75 caracteres')),
@@ -101,4 +102,16 @@ function remove(req) {
 	return experiencias.remove({_id: req.query['id']});
 }
 
-module.exports = { search, getAll, getOne, create, remove };
+async function addReview(expId, reviewId) {
+	try {
+		const exp = await experiencias.findOne({_id: expId});console.log(exp);
+		exp.review = new ObjectID(reviewId);console.log(exp);
+		delete exp["_id"];
+		return experiencias.update({"_id": expId}, exp);
+	} catch (error) {
+		res.status(500);
+		res.json(error);
+	}
+}
+
+module.exports = { search, getAll, getOne, create, remove, addReview };
