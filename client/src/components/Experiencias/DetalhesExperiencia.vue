@@ -1,30 +1,30 @@
 <template>
-  <div class="form-exp">
-    <h3 v-if="exp && exp.cargo">{{exp.cargo}} - {{exp.empresa}}</h3>
-    <h3 v-else-if="exp && exp.erro">Ocorreu um erro ao buscar a experiência =/</h3>
+  <div class="form-exp" v-if="exp">
+    <h3 v-if="exp.cargo">{{exp.cargo}} - {{exp.empresa}}</h3>
+    <h3 v-else-if="exp.erro">Ocorreu um erro ao buscar a experiência =/</h3>
     <h3 v-else>Buscando...</h3>
     <hr />
-    <div v-if="exp && exp.erro">
+    <div v-if="exp.erro">
       <router-link to="/experiencias/listar">Voltar para a lista</router-link>
     </div>
     <div v-else>
       <p>
-        <b v-if="exp">Atividades realizadas:</b> {{exp.atividadesRealizadas}}
+        <b>Atividades realizadas:</b> {{exp.atividadesRealizadas}}
       </p>
       <b-container>
         <b-row>
-          <b-col v-if="exp && exp.tipo">
+          <b-col v-if="exp.tipo">
             <b>Tipo de estágio:</b> {{exp.tipo.substr(0,1).toUpperCase()}}{{exp.tipo.substr(1)}}
           </b-col>
-          <b-col v-if="exp && exp.periodoContratado">
+          <b-col v-if="exp.periodoContratado">
             <b>Período que foi contratado:</b> {{exp.periodoContratado.replace('modulo', 'módulo').replace('estagio', 'estágio')}}
           </b-col>
         </b-row>
         <b-row>
-          <b-col v-if="exp && exp.dataEntrada">
+          <b-col v-if="exp.dataEntrada">
             <b>Data de entrada:</b> {{exp.dataEntrada}}
           </b-col>
-          <b-col v-if="exp && exp.duracao">
+          <b-col v-if="exp.duracao">
             <b>Tempo de estágio:</b> {{exp.duracao}} meses
           </b-col>
         </b-row>
@@ -35,17 +35,17 @@
         <b-row>
           <b-col>
             <b>Salário:</b>{{' '}}
-            <span v-if="exp && exp.salario">{{exp.salario}} reais</span>
+            <span v-if="exp.salario">{{exp.salario}} reais</span>
             <span v-else>Não informado</span>
           </b-col>
           <b-col>
             <b>Vale alimentação/refeição:</b>{{' '}}
-            <span v-if="exp && exp.beneficios && exp.beneficios.VRVA">{{exp.beneficios.VRVA}}</span>
+            <span v-if="exp.beneficios && exp.beneficios.VRVA">{{exp.beneficios.VRVA}}</span>
             <span v-else>Não informado</span>
           </b-col>
           <b-col>
             <b>Vale transporte:</b>{{' '}}
-            <span v-if="exp && exp.beneficios && exp.beneficios.VT">{{exp.beneficios.VT}}</span>
+            <span v-if="exp.beneficios && exp.beneficios.VT">{{exp.beneficios.VT}}</span>
             <span v-else>Não informado</span>
           </b-col>
         </b-row>
