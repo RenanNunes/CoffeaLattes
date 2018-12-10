@@ -104,8 +104,8 @@ function remove(req) {
 
 async function addReview(expId, reviewId) {
 	try {
-		const exp = await experiencias.findOne({_id: expId});console.log(exp);
-		exp.review = new ObjectID(reviewId);console.log(exp);
+		const exp = await experiencias.findOne({_id: expId});
+		exp.review = new ObjectID(reviewId);
 		delete exp["_id"];
 		return experiencias.update({"_id": expId}, exp);
 	} catch (error) {
