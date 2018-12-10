@@ -82,7 +82,7 @@ module.exports = function(app) {
 	});
 
 	app.post('/reviews/criar', async (req, res) => {
-		try {console.log(req.body)
+		try {
 			const result = await reviews.create(req.body && req.body.review);
 			const expUpdated = await experiencias.addReview(req.body && req.body.exp, result['_id']);
 			res.json(result);
