@@ -41,14 +41,16 @@ function getOne(id) {
                   			{"senha": 0 });;	
 }
 
-function create(usuario) {
+async function create(usuario) {
 	const resultado = Joi.validate(usuario, schema);
 	if (!resultado.error) {
 		agora = new Date();
 		usuario.dataCriacao = agora;
 		usuario.ultimoAcesso = agora;
 		usuario.tipoUsuario = tipoUsuarioEnum.comum;
-		return usuarios.insert(usuario);
+		ret = await usuarios.insert(usuario);
+		delete ret["senha"];
+		return ret; 
 	} else {
 		const erro = {
 			erro: true,
@@ -60,7 +62,7 @@ function create(usuario) {
 
 async function update(usuario) {
 	if (!usuario['id']){
-		throw "Não pode deletar sem um id";
+		throw "Não pode editar sem um id";
 	}
 	id = usuario["id"];
 	delete usuario["id"];
