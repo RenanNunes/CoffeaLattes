@@ -83,7 +83,8 @@ module.exports = function(app) {
 
 	app.post('/reviews/criar', async (req, res) => {
 		try {
-			const result = await reviews.create(req.body);
+			const result = await reviews.create(req.body && req.body.review);
+			const expUpdated = await experiencias.addReview(req.body && req.body.exp, result['_id']);
 			res.json(result);
 		} catch (error) {
 			res.status(500);

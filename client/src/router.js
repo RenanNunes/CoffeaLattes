@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import CriarExperiencia from './views/CriarExperiencia.vue';
 import ListarExperiencia from './views/ListarExperiencia.vue';
+import CriarReview from './views/CriarReview.vue';
 import DetalharExperiencia from './views/DetalharExperiencia.vue';
 import CriarVaga from './views/CriarVaga.vue';
 import ListarVaga from './views/ListarVaga.vue';
@@ -27,6 +28,11 @@ export default new Router({
       path: '/experiencias/listar/:buscar?',
       name: 'listarExperiencias',
       component: ListarExperiencia,
+    },
+    {
+      path: '/reviews/criar/:exp/:emp',
+      name: 'criarReview',
+      component: CriarReview,
     },
     {
       path: '/experiencia/detalhar/:id',
