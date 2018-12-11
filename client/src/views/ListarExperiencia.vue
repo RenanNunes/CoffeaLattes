@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container class="busca-container">
-      <FormBusca />
+      <FormBusca :filtrar="filtrar" />
       <br />
       <ListaExperiencias :items="items" />
   </b-container>
@@ -31,6 +31,17 @@ export default {
   methods:{
     async onStart() {
       const result = await fetch(API_URL+'/experiencia/buscar', {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+        },
+      });
+      const resultJSON = await result.json();
+      this.items = resultJSON;
+    },
+    async filtrar(tipo, cargo, salario, VRVA, VT) {
+      const query = '?tipo=' + tipo +'&cargo=' + cargo + '&salario=' + salario + '&VRVA=' + VRVA + '&VT=' + VT;
+      const result = await fetch(API_URL+'/experiencia/buscar' + query, {
         method: 'GET',
         headers: {
           'content-type': 'application/json',

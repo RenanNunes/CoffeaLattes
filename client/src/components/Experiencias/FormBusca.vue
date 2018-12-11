@@ -62,8 +62,6 @@
 </template>
 
 <script>
-const API_URL = process.env.API_URL || 'http://localhost:3000';
-
 export default {
   data() {
     return {
@@ -89,32 +87,24 @@ export default {
       show: true,
     }
   },
+  props: {
+    filtrar: {
+      type: Function,
+      required: true,
+    }
+  },
   created() {
     this.showCollapse = !!(this.$route.params && this.$route.params.buscar);
   },
   methods: {
-    async onSubmit(evt) {
+    onSubmit(evt) {
       evt.preventDefault();
-      const result = await fetch(API_URL+'/experiencia/buscar', {
-        method: 'POST',
-        body: JSON.stringify(this.exp),
-        headers: {
-          'content-type': 'application/json',
-        },
-      });
-      const resultJSON = await result.json();
-      if (resultJSON.erro) {
-        this.error = resultJSON.mensagem;
-      } else {
-        this.exp.cargo = '';
-        this.exp.tipo = null;
-        this.exp.salario = '';
-        this.exp.beneficios = {
-          VRVA: false,
-          VT: false,
-        },
-        this.error = '';
-      }
+      const tipo = this.exp.tipo ? this.exp.tipo : '';
+      const cargo = this.exp.cargo ? this.exp.cargo : '';
+      const salario = this.exp.salario ? this.exp.salario : '';
+      const VRVA = this.exp.beneficios.VRVA ? this.exp.beneficios.VRVA : '';
+      const VT = this.exp.beneficios.VT ? this.exp.beneficios.VT : '';
+      this.filtrar(tipo, cargo, salario, VRVA, VT);
     },
     onReset (evt) {
       evt.preventDefault();
