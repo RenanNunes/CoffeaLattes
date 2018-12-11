@@ -113,7 +113,7 @@ module.exports = function(app) {
 		}
 	});
 	
-	app.post('/reviews/remover', async (req, res) => {
+	app.delete('/reviews/apagar', async (req, res) => {
 		try {
 			const result = await reviews.remove(req.body);
 			res.json(result);

@@ -91,9 +91,6 @@ async function getOne(id, lookupReview) {
 					foreignField: '_id',
 					as: 'review'
 				}
-			},
-			{
-				$unwind:"$review"
 			}]);
 		return exp && exp[0];
 	} else {
