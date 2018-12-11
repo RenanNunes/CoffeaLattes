@@ -7,7 +7,7 @@
         </a>
       </template>
       <template slot="detalhes" slot-scope="data">
-        <a :href="`#${data.item.idExp}`">
+        <a :href="`/experiencia/detalhar/${data.item.idExp}`">
           Detalhes
         </a>
       </template>
@@ -42,7 +42,11 @@ export default {
           label: 'Salário',
           sortable: true,
           formatter: (value) => {
-            return 'R$'+value.toFixed(2);
+            if (value){
+              return 'R$'+value.toFixed(2);
+            } else {
+              return '-';
+            }
           },
         },{
           key: 'periodoContratado',
@@ -53,48 +57,7 @@ export default {
           label: 'Ver mais',
         }
       ],
-      items: [
-        /*{ cargo: 'Desenvolvedor Full-Stack', empresa: 'Liv Up', tipo: 'Quadrimestral', salario: 2000.00, periodoContratado: '3º módulo de estágio', idEmpresa: 1 , idExp: 12 },
-        { cargo: 'Consultor', empresa: 'Visagio Tecnologia', tipo: 'Estágio de férias', salario: 2200, periodoContratado: '5º semestre', idEmpresa: 5 , idExp: 52 },
-        { cargo: 'Técnico em informática', empresa: 'Dom Bosco', tipo: 'Semestral', salario: 1030.0, periodoContratado: '2º semestre', idEmpresa: 21, idExp: 221 },
-        { cargo: 'Cientista de dados', empresa: 'Nubank', tipo: 'Outro', salario: 3000.001, periodoContratado: '4º módulo de estágio', idEmpresa: 43, idExp: 423 },
-        { cargo: 'Desenvolvedor Full-Stack', empresa: 'Liv Up', tipo: 'Quadrimestral', salario: 2000.00, periodoContratado: '3º módulo de estágio', idEmpresa: 1 , idExp: 12 },
-        { cargo: 'Consultor', empresa: 'Visagio Tecnologia', tipo: 'Estágio de férias', salario: 2200, periodoContratado: '5º semestre', idEmpresa: 5 , idExp: 52 },
-        { cargo: 'Técnico em informática', empresa: 'Dom Bosco', tipo: 'Semestral', salario: 1030.0, periodoContratado: '2º semestre', idEmpresa: 21, idExp: 221 },
-        { cargo: 'Cientista de dados', empresa: 'Nubank', tipo: 'Outro', salario: 3000.001, periodoContratado: '4º módulo de estágio', idEmpresa: 43, idExp: 423 },
-        { cargo: 'Desenvolvedor Full-Stack', empresa: 'Liv Up', tipo: 'Quadrimestral', salario: 2000.00, periodoContratado: '3º módulo de estágio', idEmpresa: 1 , idExp: 12 },
-        { cargo: 'Consultor', empresa: 'Visagio Tecnologia', tipo: 'Estágio de férias', salario: 2200, periodoContratado: '5º semestre', idEmpresa: 5 , idExp: 52 },
-        { cargo: 'Técnico em informática', empresa: 'Dom Bosco', tipo: 'Semestral', salario: 1030.0, periodoContratado: '2º semestre', idEmpresa: 21, idExp: 221 },
-        { cargo: 'Cientista de dados', empresa: 'Nubank', tipo: 'Outro', salario: 3000.001, periodoContratado: '4º módulo de estágio', idEmpresa: 43, idExp: 423 },
-        { cargo: 'Desenvolvedor Full-Stack', empresa: 'Liv Up', tipo: 'Quadrimestral', salario: 2000.00, periodoContratado: '3º módulo de estágio', idEmpresa: 1 , idExp: 12 },
-        { cargo: 'Consultor', empresa: 'Visagio Tecnologia', tipo: 'Estágio de férias', salario: 2200, periodoContratado: '5º semestre', idEmpresa: 5 , idExp: 52 },
-        { cargo: 'Técnico em informática', empresa: 'Dom Bosco', tipo: 'Semestral', salario: 1030.0, periodoContratado: '2º semestre', idEmpresa: 21, idExp: 221 },
-        { cargo: 'Cientista de dados', empresa: 'Nubank', tipo: 'Outro', salario: 3000.001, periodoContratado: '4º módulo de estágio', idEmpresa: 43, idExp: 423 },
-        { cargo: 'Desenvolvedor Full-Stack', empresa: 'Liv Up', tipo: 'Quadrimestral', salario: 2000.00, periodoContratado: '3º módulo de estágio', idEmpresa: 1 , idExp: 12 },
-        { cargo: 'Consultor', empresa: 'Visagio Tecnologia', tipo: 'Estágio de férias', salario: 2200, periodoContratado: '5º semestre', idEmpresa: 5 , idExp: 52 },
-        { cargo: 'Técnico em informática', empresa: 'Dom Bosco', tipo: 'Semestral', salario: 1030.0, periodoContratado: '2º semestre', idEmpresa: 21, idExp: 221 },
-        { cargo: 'Cientista de dados', empresa: 'Nubank', tipo: 'Outro', salario: 3000.001, periodoContratado: '4º módulo de estágio', idEmpresa: 43, idExp: 423 },
-        { cargo: 'Desenvolvedor Full-Stack', empresa: 'Liv Up', tipo: 'Quadrimestral', salario: 2000.00, periodoContratado: '3º módulo de estágio', idEmpresa: 1 , idExp: 12 },
-        { cargo: 'Consultor', empresa: 'Visagio Tecnologia', tipo: 'Estágio de férias', salario: 2200, periodoContratado: '5º semestre', idEmpresa: 5 , idExp: 52 },
-        { cargo: 'Técnico em informática', empresa: 'Dom Bosco', tipo: 'Semestral', salario: 1030.0, periodoContratado: '2º semestre', idEmpresa: 21, idExp: 221 },
-        { cargo: 'Cientista de dados', empresa: 'Nubank', tipo: 'Outro', salario: 3000.001, periodoContratado: '4º módulo de estágio', idEmpresa: 43, idExp: 423 },
-        { cargo: 'Desenvolvedor Full-Stack', empresa: 'Liv Up', tipo: 'Quadrimestral', salario: 2000.00, periodoContratado: '3º módulo de estágio', idEmpresa: 1 , idExp: 12 },
-        { cargo: 'Consultor', empresa: 'Visagio Tecnologia', tipo: 'Estágio de férias', salario: 2200, periodoContratado: '5º semestre', idEmpresa: 5 , idExp: 52 },
-        { cargo: 'Técnico em informática', empresa: 'Dom Bosco', tipo: 'Semestral', salario: 1030.0, periodoContratado: '2º semestre', idEmpresa: 21, idExp: 221 },
-        { cargo: 'Cientista de dados', empresa: 'Nubank', tipo: 'Outro', salario: 3000.001, periodoContratado: '4º módulo de estágio', idEmpresa: 43, idExp: 423 },
-        { cargo: 'Desenvolvedor Full-Stack', empresa: 'Liv Up', tipo: 'Quadrimestral', salario: 2000.00, periodoContratado: '3º módulo de estágio', idEmpresa: 1 , idExp: 12 },
-        { cargo: 'Consultor', empresa: 'Visagio Tecnologia', tipo: 'Estágio de férias', salario: 2200, periodoContratado: '5º semestre', idEmpresa: 5 , idExp: 52 },
-        { cargo: 'Técnico em informática', empresa: 'Dom Bosco', tipo: 'Semestral', salario: 1030.0, periodoContratado: '2º semestre', idEmpresa: 21, idExp: 221 },
-        { cargo: 'Cientista de dados', empresa: 'Nubank', tipo: 'Outro', salario: 3000.001, periodoContratado: '4º módulo de estágio', idEmpresa: 43, idExp: 423 },
-        { cargo: 'Desenvolvedor Full-Stack', empresa: 'Liv Up', tipo: 'Quadrimestral', salario: 2000.00, periodoContratado: '3º módulo de estágio', idEmpresa: 1 , idExp: 12 },
-        { cargo: 'Consultor', empresa: 'Visagio Tecnologia', tipo: 'Estágio de férias', salario: 2200, periodoContratado: '5º semestre', idEmpresa: 5 , idExp: 52 },
-        { cargo: 'Técnico em informática', empresa: 'Dom Bosco', tipo: 'Semestral', salario: 1030.0, periodoContratado: '2º semestre', idEmpresa: 21, idExp: 221 },
-        { cargo: 'Cientista de dados', empresa: 'Nubank', tipo: 'Outro', salario: 3000.001, periodoContratado: '4º módulo de estágio', idEmpresa: 43, idExp: 423 },
-        { cargo: 'Desenvolvedor Full-Stack', empresa: 'Liv Up', tipo: 'Quadrimestral', salario: 2000.00, periodoContratado: '3º módulo de estágio', idEmpresa: 1 , idExp: 12 },
-        { cargo: 'Consultor', empresa: 'Visagio Tecnologia', tipo: 'Estágio de férias', salario: 2200, periodoContratado: '5º semestre', idEmpresa: 5 , idExp: 52 },
-        { cargo: 'Técnico em informática', empresa: 'Dom Bosco', tipo: 'Semestral', salario: 1030.0, periodoContratado: '2º semestre', idEmpresa: 21, idExp: 221 },
-        { cargo: 'Cientista de dados', empresa: 'Nubank', tipo: 'Outro', salario: 3000.001, periodoContratado: '4º módulo de estágio', idEmpresa: 43, idExp: 423 },*/
-      ],
+      items: [],
 
     }
   },
@@ -106,7 +69,6 @@ export default {
       /*evt.preventDefault();*/
       const result = await fetch(API_URL+'/experiencia/buscar', {
         method: 'GET',
-        body: JSON.stringify(this.exp),
         headers: {
           'content-type': 'application/json',
         },

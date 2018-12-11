@@ -66,7 +66,7 @@ module.exports = function(app) {
 		}
 	});
 	
-	app.post('/vagas/remover', async (req, res) => {
+	app.delete('/vagas/apagar', async (req, res) => {
 		try {
 			const result = await vagas.remove(req.body);
 			res.json(result);

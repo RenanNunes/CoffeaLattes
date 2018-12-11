@@ -134,7 +134,7 @@ export default {
         };
         this.error = '';
         this.success = true;
-        this.$router.push({ name: 'listarExperiencia' });
+        this.$router.push({ name: 'listarExperiencias' });
       }
     },
     onReset (evt) {
