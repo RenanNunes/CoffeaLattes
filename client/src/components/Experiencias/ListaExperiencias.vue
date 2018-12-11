@@ -17,8 +17,6 @@
 </template>
 
 <script>
-const API_URL = process.env.API_URL || 'http://localhost:3000';
-
 export default {
   data () {
     return {
@@ -57,25 +55,13 @@ export default {
           label: 'Ver mais',
         }
       ],
-      items: [],
-
     }
   },
-  created: function () {
-    this.onStart();
+  props: {
+      items: {
+        type: Array,
+        required: true,
+      }
   },
-  methods:{
-    async onStart() {
-      /*evt.preventDefault();*/
-      const result = await fetch(API_URL+'/experiencia/buscar', {
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-        },
-      });
-      const resultJSON = await result.json();
-      this.items = resultJSON;
-    }
-  }
 }
 </script>
