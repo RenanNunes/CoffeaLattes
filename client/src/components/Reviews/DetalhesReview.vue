@@ -5,16 +5,18 @@
     <div>
       <b-container>
         <b-row>
-          <b-col v-if="review.opinioes">
+          <b-col>
             <b>Opinião:</b> {{review.opinioes}}
           </b-col>
-          <b-col v-if="review.recomenda">
-            <b>Recomenda a experiência </b> <b-form-checkbox :value="review.recomenda" readOnly></b-form-checkbox>
+        </b-row>
+        <b-row>
+          <b-col>
+            <b>Recomenda a experiência: </b> <b-form-checkbox v-model="review.recomenda" class="check-recomenda" disabled />
           </b-col>
         </b-row>
       </b-container>
       <br />
-      <h5 v-if="review.notas">Notas:</h5>
+      <h5 v-if="review.notas && (review.notas.ambiente || review.notas.aprendizado || review.notas.autonomia)">Notas:</h5>
       <b-container v-if="review.notas">
         <b-row>
           <b-col v-if="review.notas.ambiente">
@@ -76,7 +78,7 @@ export default {
 }
 
 .form-review {
-  background-color: #f5f5f5;
+  background-color: #f8f8f8;
   padding: 15px;
   border-radius: 5px;
   margin-top: 15px;
@@ -84,5 +86,10 @@ export default {
 
 .col{
   padding-left: 0px;
+}
+
+.check-recomenda {
+  vertical-align: middle;
+  size: 2em;
 }
 </style>
