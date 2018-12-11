@@ -78,7 +78,7 @@ function prepareToFrontEndList(list) {
 
 async function getOne(id, lookupReview) {
 	if (lookupReview) {
-		const exp = await experiencias.aggregate(
+		const exp = await experiencias.aggregate([
 			{
 				$match : {
 					_id : new ObjectID(id)
@@ -94,7 +94,7 @@ async function getOne(id, lookupReview) {
 			},
 			{
 				$unwind:"$review"
-			});
+			}]);
 		return exp && exp[0];
 	} else {
 		return experiencias.findOne({_id: id});
