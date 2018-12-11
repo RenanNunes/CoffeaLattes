@@ -92,6 +92,16 @@ module.exports = function(app) {
 			res.json(error);
 		}
 	});
+		
+	app.post('/reviews/remover', async (req, res) => {
+		try {
+			const result = await reviews.remove(req.body);
+			res.json(result);
+		} catch (error) {
+			res.status(500);
+			res.json(error);
+		}
+	})
 
 	app.get('/empresa', async (req, res)=> {
 		const emp = await empresas.getAll();
@@ -112,16 +122,6 @@ module.exports = function(app) {
 			res.json(error);
 		}
 	});
-	
-	app.post('/reviews/remover', async (req, res) => {
-		try {
-			const result = await reviews.remove(req.body);
-			res.json(result);
-		} catch (error) {
-			res.status(500);
-			res.json(error);
-		}
-	})
 
 	app.post('/empresa/editar', async (req, res) => {
 		try {
