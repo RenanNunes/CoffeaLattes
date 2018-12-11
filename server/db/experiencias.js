@@ -24,7 +24,7 @@ function search(req) {
 		return getAll();
 	} else {
 		if (req.query['id']) {
-			return getOne(req.query['id']);
+			return getOne(req.query['id'], req.query['rvw']);
 		} else {
 			return getFilter(req.query)
 		}
@@ -76,8 +76,29 @@ function prepareToFrontEndList(list) {
     });
 }
 
-function getOne(id) {
-	return experiencias.findOne({_id: id});
+async function getOne(id, lookupReview) {
+	if (lookupReview) {
+		const exp = await experiencias.aggregate(
+			{
+				$match : {
+					_id : new ObjectID(id)
+				}
+			},
+			{
+				$lookup: {
+					from: 'reviews',
+					localField: 'review',
+					foreignField: '_id',
+					as: 'review'
+				}
+			},
+			{
+				$unwind:"$review"
+			});
+		return exp && exp[0];
+	} else {
+		return experiencias.findOne({_id: id});
+	}
 }
 
 function create(exp) {
