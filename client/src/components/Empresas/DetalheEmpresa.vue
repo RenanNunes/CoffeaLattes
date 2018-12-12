@@ -60,13 +60,13 @@ export default {
     },
     apagar() {
       const id = this.emp && this.emp._id;
-      fetch(API_URL + '/empresas/apagar?id=' + id, {
+      fetch(API_URL + '/empresa/apagar?id=' + id, {
         method: 'DELETE',
         headers: {
           'content-type': 'application/json',
         },
       }).then(() => this.$router.push({ name: 'listarEmpresas' }));
-    }
+    },
   }
 }
 </script>
