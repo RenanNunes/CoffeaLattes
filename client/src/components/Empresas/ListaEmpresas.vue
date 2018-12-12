@@ -2,12 +2,12 @@
   <div>
     <b-table :fields="fields" :items="items" hover :currentPage="currentPage" :per-page="perPage">
       <template slot="site" slot-scope="data">
-        <a :href="`#${data.item.idSite}`">
+        <a :href="`${data.value}`">
           {{data.value}}
         </a>
       </template>
       <template slot="detalhes" slot-scope="data">
-        <a :href="`/empresa/detalhar/${data.item.id}`">
+        <a :href="`/empresas/detalhar/${data.item._id}`">
           Detalhes
         </a>
       </template>
