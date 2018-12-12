@@ -5,7 +5,7 @@
     <h3 v-else>Buscando...</h3>
     <hr />
     <div v-if="emp.erro">
-      <router-link to="/empresa/listar">Voltar para a lista</router-link>
+      <router-link to="/empresas/listar">Voltar para a lista</router-link>
     </div>
     <div v-else>
       <p>
@@ -60,7 +60,7 @@ export default {
     },
     apagar() {
       const id = this.emp && this.emp._id;
-      fetch(API_URL + '/empresa/apagar?id=' + id, {
+      fetch(API_URL + '/empresas/apagar?id=' + id, {
         method: 'DELETE',
         headers: {
           'content-type': 'application/json',
