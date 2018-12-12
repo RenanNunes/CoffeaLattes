@@ -79,11 +79,15 @@ export default {
     return {
       emp: {
         nome: '',
-        localidades: null,
+        localidades: '',
         areaDeAtuacao: '',
         descricao: '',
         site: '',
-        notasMedias: null,
+        notasMedias: {
+          ambiente: '',
+          aprendizado: '',
+          autonomia: ''
+        },
       },
       error: '',
       success: '',
@@ -94,11 +98,11 @@ export default {
     async onSubmit(evt) {
       evt.preventDefault();
       this.emp.localidades = this.emp.localidades.split(/\r?\n/);
-      const result = await fetch(API_URL+'/empresa/criar', {
+        const result = await fetch(API_URL+'/empresa/criar', {
         method: 'POST',
         body: JSON.stringify(this.emp),
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       });
       const resultJSON = await result.json();
@@ -106,15 +110,20 @@ export default {
         this.error = resultJSON.mensagem;
         this.success = '';
       } else {
-        this.emp.nome = '';
-        this.emp.localidades = null;
+      
+       this.emp.nome = '';
+        this.emp.localidades = '';
         this.emp.areaDeAtuacao = '';
         this.emp.descricao = '';
         this.emp.site = '';
-        this.emp.notasMedias = null;
+        this.emp.notasMedias = {
+          ambiente: '',
+          aprendizado: '',
+          autonomia: ''
+        };
         this.error = '';
         this.success = true;
-        const rota = '/empresa/buscar';
+       const rota = '/empresas/listar';
         this.$router.push({ path: rota });
       }
     },
@@ -122,14 +131,18 @@ export default {
       evt.preventDefault();
       /* Reset our emp values */
       this.emp.nome = '';
-      this.emp.localidades = null;
+      this.emp.localidades = '';
       this.emp.areaDeAtuacao = '';
       this.emp.descricao = '';
       this.emp.site = '';
-      this.emp.notasMedias = null;
+      this.emp.notasMedias = {
+        ambiente: '',
+        aprendizado: '',
+        autonomia: ''
+      };
       this.error = '';
       this.success = '';
-      /* Trick to reset/clear native browser exp validation state */
+      /* Trick to reset/clear native browser emp validation state */
       this.show = false;
       this.$nextTick(() => { this.show = true });
     },

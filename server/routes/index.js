@@ -115,7 +115,7 @@ module.exports = function(app) {
 
 	app.post('/empresa/criar', async (req, res) => {
 		try {
-			const result = await empresas.create(req.query);
+			const result = await empresas.create(req.body);
 			res.json(result);
 		} catch (error) {
 			res.status(500);
