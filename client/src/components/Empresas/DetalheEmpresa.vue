@@ -12,7 +12,7 @@
         <b>Descrição: </b> {{emp.descricao}}
       </p>
       <p>
-            <b>Locais da empresa:</b>
+            <b>Locais da empresa:</b> {{emp.localidades}}
           </p>
         <p v-if="emp.areaDeAtuacao">
             <b>Área de atuação:</b> {{emp.areaDeAtuacao}}
@@ -22,9 +22,6 @@
             <a :href="`#${emp.site}`">
                 {{emp.site}}
             </a>
-        </p>
-        <p>
-
         </p>
       <hr />
       <b-button @click="showModal" variant="danger" class="botao-form">Apagar</b-button>
@@ -40,13 +37,6 @@
 
 <script>
 const API_URL = process.env.API_URL || 'http://localhost:3000';
-/*
-for(i = 0; i < emp.localidades.length; i++){
-    var local = emp.localidades[i] + ", "; 
-}
-local = local - ", ";
-$("#display").val(local);
-*/
 export default {
   props: {
       emp: {
@@ -60,12 +50,12 @@ export default {
     },
     apagar() {
       const id = this.emp && this.emp._id;
-      fetch(API_URL + '/empresa/apagar?id=' + id, {
+      fetch(API_URL + '/empresa/remover?_id=' + id, {
         method: 'DELETE',
         headers: {
           'content-type': 'application/json',
         },
-      }).then(() => this.$router.push({ name: 'listarEmpresas' }));
+      }).then(() => this.$router.push({ path: '/empresas/listar' }));
     },
   }
 }
