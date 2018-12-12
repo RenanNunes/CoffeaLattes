@@ -107,7 +107,7 @@ module.exports = function(app) {
 		const emp = await empresas.getAll();
 		res.json(emp);
 	})
-	
+
 	app.get('/empresa/buscar', async (req, res) => {
 		const emp = await empresas.getAll(req.query);
 		res.json(emp);
@@ -121,6 +121,11 @@ module.exports = function(app) {
 			res.status(500);
 			res.json(error);
 		}
+	});
+	
+	app.delete('/empresa/remover', async (req, res) => {
+		const emp = await empresas.remove(req.query);
+		res.json(emp);
 	});
 
 	app.post('/empresa/editar', async (req, res) => {
