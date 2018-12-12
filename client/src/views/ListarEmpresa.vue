@@ -10,13 +10,13 @@
 
 <script>
 // @ is an alias to /src
-import BuscaEmpresas from '@/components/Empresas/BuscaEmpresas.vue';
+//import BuscaEmpresas from '@/components/Empresas/BuscaEmpresas.vue';
 import ListaEmpresas from '@/components/Empresas/ListaEmpresas.vue';
 
 export default {
   name: 'listarEmpresa',
   components: {
-    BuscaEmpresas,
+  //BuscaEmpresas,
     ListaEmpresas,
   },
 };
