@@ -8,6 +8,8 @@ import DetalharExperiencia from './views/DetalharExperiencia.vue';
 import CriarVaga from './views/CriarVaga.vue';
 import ListarVaga from './views/ListarVaga.vue';
 import Erro404 from './views/Erro404.vue';
+import CriarEmpresa from './views/CriarEmpresa.vue';
+import ListarEmpresa from './views/ListarEmpresa.vue';
 
 Vue.use(Router);
 
@@ -48,6 +50,16 @@ export default new Router({
       path: '/vagas/listar',
       name: 'listarVaga',
       component: ListarVaga,
+    },
+    {
+      path: '/empresas/criar',
+      name: 'criarEmpresa',
+      component: CriarEmpresa,
+    },
+    {
+      path: '/empresas/listar',
+      name: 'listarEmpresa',
+      component: ListarEmpresa,
     },
     {
       path: '*',
