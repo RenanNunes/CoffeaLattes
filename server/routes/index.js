@@ -92,27 +92,7 @@ module.exports = function(app) {
 			res.json(error);
 		}
 	});
-
-	app.get('/empresa', async (req, res)=> {
-		const emp = await empresas.getAll();
-		res.json(emp);
-	})
-	
-	app.get('/empresa/buscar', async (req, res) => {
-		const emp = await empresas.getAll(req.query);
-		res.json(emp);
-	})
-
-	app.post('/empresa/criar', async (req, res) => {
-		try {
-			const result = await empresas.create(req.query);
-			res.json(result);
-		} catch (error) {
-			res.status(500);
-			res.json(error);
-		}
-	});
-	
+		
 	app.delete('/reviews/apagar', async (req, res) => {
 		try {
 			const result = await reviews.remove(req.body);
@@ -122,6 +102,31 @@ module.exports = function(app) {
 			res.json(error);
 		}
 	})
+
+	app.get('/empresa', async (req, res)=> {
+		const emp = await empresas.getAll();
+		res.json(emp);
+	})
+
+	app.get('/empresa/buscar', async (req, res) => {
+		const emp = await empresas.getAll(req.query);
+		res.json(emp);
+	})
+
+	app.post('/empresa/criar', async (req, res) => {
+		try {
+			const result = await empresas.create(req.body);
+			res.json(result);
+		} catch (error) {
+			res.status(500);
+			res.json(error);
+		}
+	});
+
+	app.delete('/empresa/remover', async (req, res) => {
+		const emp = await empresas.remove(req.query);
+		res.json(emp);
+	});
 
 	app.post('/empresa/editar', async (req, res) => {
 		try {

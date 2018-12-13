@@ -35,13 +35,16 @@ function create(emp) {
 		return Promise.reject(erro);
 	}
 }
-/*
+
 function update(emp){
-        return empresas.updateOne({_id: emp.body["id"]});
+    console.log(emp);
+    id = emp["_id"];
+    delete emp["_id"];
+    return empresas.update({"_id": id}, emp);
 }
-*/
+
 function remove(emp){
     return empresas.remove(emp);
 }
 
-module.exports = { getAll, create, /*update,*/ remove };
+module.exports = { getAll, create, update, remove };
