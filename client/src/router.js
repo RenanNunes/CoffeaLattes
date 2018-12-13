@@ -11,6 +11,7 @@ import Erro404 from './views/Erro404.vue';
 import CriarEmpresa from './views/CriarEmpresa.vue';
 import ListarEmpresa from './views/ListarEmpresa.vue';
 import DetalharEmpresa from './views/DetalharEmpresa.vue';
+import CriarUsuario from './views/CriarUsuario.vue';
 
 Vue.use(Router);
 
@@ -66,6 +67,11 @@ export default new Router({
       path: '/empresas/detalhar/:id',
       name: 'detalharEmpresa',
       component: DetalharEmpresa,
+    },
+    {
+      path: '/signup',
+      name: 'criarUsuario',
+      component: CriarUsuario,
     },
     {
       path: '*',

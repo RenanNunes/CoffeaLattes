@@ -39,9 +39,10 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-
+          <b-nav-item right href="/signup">Cadastre-se</b-nav-item>
           <b-nav-item-dropdown right>
             <!-- Using button-content slot -->
+            
             <template slot="button-content">
               <em>Conta</em>
             </template>
