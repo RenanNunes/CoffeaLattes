@@ -13,6 +13,7 @@ import ListarEmpresa from './views/ListarEmpresa.vue';
 import DetalharEmpresa from './views/DetalharEmpresa.vue';
 import CriarUsuario from './views/CriarUsuario.vue';
 import LoginUsuario from './views/LoginUsuario.vue';
+import DetalharUsuario from './views/DetalharUsuario.vue';
 
 Vue.use(Router);
 
@@ -74,10 +75,15 @@ export default new Router({
       name: 'criarUsuario',
       component: CriarUsuario,
     },
-	{
+	  {
       path: '/login',
       name: 'login',
       component: LoginUsuario,
+    },
+    {
+      path: '/usuario/detalhar/:id',
+      name: 'detalharUsuario',
+      component: DetalharUsuario,
     },
     {
       path: '*',
