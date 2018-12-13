@@ -21,6 +21,14 @@
           <b-nav-item-dropdown right>
             <!-- Using button-content slot -->
             <template slot="button-content">
+              <em>Empresas</em>
+            </template>
+            <b-dropdown-item href="/empresas/criar">Adicionar</b-dropdown-item>
+            <b-dropdown-item href="/empresas/listar">Listar todas</b-dropdown-item>
+          </b-nav-item-dropdown>
+          <b-nav-item-dropdown right>
+            <!-- Using button-content slot -->
+            <template slot="button-content">
               <em>Vagas</em>
             </template>
             <b-dropdown-item href="/vagas/criar">Adicionar</b-dropdown-item>
