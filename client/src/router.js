@@ -12,6 +12,7 @@ import CriarEmpresa from './views/CriarEmpresa.vue';
 import ListarEmpresa from './views/ListarEmpresa.vue';
 import DetalharEmpresa from './views/DetalharEmpresa.vue';
 import CriarUsuario from './views/CriarUsuario.vue';
+import LoginUsuario from './views/LoginUsuario.vue';
 
 Vue.use(Router);
 
@@ -72,6 +73,11 @@ export default new Router({
       path: '/signup',
       name: 'criarUsuario',
       component: CriarUsuario,
+    },
+	{
+      path: '/login',
+      name: 'login',
+      component: LoginUsuario,
     },
     {
       path: '*',

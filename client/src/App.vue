@@ -46,6 +46,7 @@
             <template slot="button-content">
               <em>Conta</em>
             </template>
+            <b-dropdown-item href="/login">Login</b-dropdown-item>
             <b-dropdown-item href="#">Perfil</b-dropdown-item>
             <b-dropdown-item href="#">Sair</b-dropdown-item>
           </b-nav-item-dropdown>
