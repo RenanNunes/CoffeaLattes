@@ -31,7 +31,6 @@ export default {
       },
     });
     const resultJSON = await result.json();
-    console.log(resultJSON);
     if (resultJSON && resultJSON._id) {
       this.user = resultJSON;
     }
