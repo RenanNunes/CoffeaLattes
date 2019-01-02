@@ -28,4 +28,14 @@ function deleteCookie(cname) {
 	document.cookie = cname + "=" + ";" + expires + ";path=/";
 }
 
-export { getCookie, setCookie, deleteCookie };
+function checkCookie(cname) {
+	var cookie = getCookie(cname);
+	if (cookie != "" && cookie != null) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+export { getCookie, setCookie, deleteCookie, checkCookie };

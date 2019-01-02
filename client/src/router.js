@@ -76,16 +76,16 @@ export default new Router({
       name: 'criarUsuario',
       component: CriarUsuario,
     },
-	{
+	  {
       path: '/login',
       name: 'login',
       component: LoginUsuario,
-	},
-	{
-	  path: '/logout',
-	  name: 'logout',
-	  component: LogoutUsuario,	  
-	},
+	  },
+	  {
+	    path: '/logout',
+	    name: 'logout',
+	    component: LogoutUsuario,	  
+	  },
     {
       path: '/usuario/detalhar',
       name: 'detalharUsuario',

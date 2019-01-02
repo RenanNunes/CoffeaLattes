@@ -39,14 +39,14 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item right href="/signup">Cadastre-se</b-nav-item>
-          <b-nav-item-dropdown right>
+          <b-nav-item v-if="!userExist" right href="/signup">Cadastre-se</b-nav-item>
+          <b-nav-item v-if="!userExist" right href="/login">Login</b-nav-item>
+
+          <b-nav-item-dropdown v-if="userExist" right>
             <!-- Using button-content slot -->
-            
             <template slot="button-content">
               <em>Conta</em>
             </template>
-            <b-dropdown-item href="/login">Login</b-dropdown-item>
             <b-dropdown-item href="/usuario/detalhar">Perfil</b-dropdown-item>
             <b-dropdown-item href="/logout">Sair</b-dropdown-item>
           </b-nav-item-dropdown>
@@ -58,6 +58,14 @@
     <router-view/>
   </div>
 </template>
+
+<script>
+  export default {
+    props: {
+      userExist: Boolean
+    }
+  }
+</script>
 
 <style>
 </style>
