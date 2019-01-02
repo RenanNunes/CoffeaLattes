@@ -81,7 +81,7 @@ export default new Router({
       component: LoginUsuario,
     },
     {
-      path: '/usuario/detalhar/:id',
+      path: '/usuario/detalhar',
       name: 'detalharUsuario',
       component: DetalharUsuario,
     },

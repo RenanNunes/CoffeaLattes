@@ -67,7 +67,8 @@ export default {
         this.user.senha = '';
         this.error = '';
 		this.success = true;
-        const rota = '/usuario/detalhar/' + resultJSON["_id"];
+		document.cookie = "user=" + resultJSON["_id"];
+        const rota = '/usuario/detalhar';
         this.$router.push({ path: rota });
       }
     },

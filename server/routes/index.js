@@ -191,7 +191,6 @@ module.exports = function(app) {
 	app.post('/usuarios/login', async (req, res) => {
 		try {
             const result = await usuarios.login(req);
-            res.setHeader('Set-Cookie', 'user_id=' + result._id +'; Secure; HttpOnly');
 			res.json(result);
 		} catch (error) {
 			res.status(500);
