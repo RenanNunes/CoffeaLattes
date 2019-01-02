@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { setCookie } from '@/cookie.js';
 const API_URL = process.env.API_URL || 'http://localhost:3000';
 
 export default {
@@ -92,7 +93,8 @@ export default {
         this.user.curso = '';
         this.error = '';
         this.success = true;
-        const rota = '/';
+        setCookie("user", resultJSON["_id"], 7);
+        const rota = '/usuario/detalhar';
         this.$router.push({ path: rota });
       }
     },
