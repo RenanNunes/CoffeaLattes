@@ -69,7 +69,7 @@ export default {
         this.user.senha = '';
         this.error = '';
 		    this.success = true;
-		    setCookie("user", resultJSON["_id"], 7);
+        setCookie("user", resultJSON["_id"], 7);
         const rota = '/usuario/detalhar';
         this.$router.push({ path: rota });
       }

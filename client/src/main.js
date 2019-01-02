@@ -13,9 +13,5 @@ Vue.use(BootstrapVue);
 
 new Vue({
   router,
-  render: h => h(App, {
-    props: {
-      userExist: checkCookie("user")
-    }
-  }),
+  render: h => h(App),
 }).$mount('#app');

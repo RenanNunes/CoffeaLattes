@@ -60,9 +60,13 @@
 </template>
 
 <script>
+  import { checkCookie } from './cookie';
+
   export default {
-    props: {
-      userExist: Boolean
+    data: function () {
+      return {
+        userExist: checkCookie("user")
+      }
     }
   }
 </script>
