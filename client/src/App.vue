@@ -48,7 +48,7 @@
             </template>
             <b-dropdown-item href="/login">Login</b-dropdown-item>
             <b-dropdown-item href="/usuario/detalhar">Perfil</b-dropdown-item>
-            <b-dropdown-item href="#">Sair</b-dropdown-item>
+            <b-dropdown-item href="/logout">Sair</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
 

@@ -49,7 +49,7 @@ export default {
         headers: {
           'content-type': 'application/json',
         },
-      }).then(() => this.$router.push({ path: '/' }));
+	  }).then(() => this.$router.push({ path: '/logout' }));
     },
   }
 }

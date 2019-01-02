@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import { setCookie } from '@/cookie.js';
+
 const API_URL = process.env.API_URL || 'http://localhost:3000';
 
 export default {
@@ -67,7 +69,7 @@ export default {
         this.user.senha = '';
         this.error = '';
 		this.success = true;
-		document.cookie = "user=" + resultJSON["_id"];
+		setCookie("user", resultJSON["_id"], 7);
         const rota = '/usuario/detalhar';
         this.$router.push({ path: rota });
       }

@@ -9,7 +9,7 @@
 <script>
 // @ is an alias to /src
 	import DetalheUsuario from '@/components/Usuarios/DetalheUsuario.vue';
-	import getCookie from '@/cookie.js';
+	import { getCookie } from '@/cookie.js';
 
 const API_URL = process.env.API_URL || 'http://localhost:3000';
 
