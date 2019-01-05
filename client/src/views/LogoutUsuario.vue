@@ -2,11 +2,10 @@
 </template>
 
 <script>
-import { deleteCookie } from '@/cookie.js';
 
 	export default {
 		mounted: function () {
-			deleteCookie("user");
+			this.$removeCookie('user');
 			this.$router.push({ path: '/' })
 		}
 	}

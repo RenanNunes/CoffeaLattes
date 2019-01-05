@@ -39,10 +39,10 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item v-if="!userExist" right href="/signup">Cadastre-se</b-nav-item>
-          <b-nav-item v-if="!userExist" right href="/login">Login</b-nav-item>
+          <b-nav-item v-if="!this.$cookies.user" right href="/signup">Cadastre-se</b-nav-item>
+          <b-nav-item v-if="!this.$cookies.user" right href="/login">Login</b-nav-item>
 
-          <b-nav-item-dropdown v-if="userExist" right>
+          <b-nav-item-dropdown v-if="this.$cookies.user" right>
             <!-- Using button-content slot -->
             <template slot="button-content">
               <em>Conta</em>
@@ -58,18 +58,6 @@
     <router-view/>
   </div>
 </template>
-
-<script>
-  import { checkCookie } from './cookie';
-
-  export default {
-    data: function () {
-      return {
-        userExist: checkCookie("user")
-      }
-    }
-  }
-</script>
 
 <style>
 </style>

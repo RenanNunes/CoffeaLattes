@@ -27,14 +27,14 @@
       <b-button type="reset" variant="danger" class="botao-form">Limpar</b-button>
       <br />
       <br />
-      <b-alert :show="!!success" variant="success">Você está logado ^^</b-alert>
+      <b-alert :show="!!success" variant="success">Vocï¿½ estï¿½ logado ^^</b-alert>
       <b-alert :show="!!error" variant="warning">{{error}}</b-alert>
     </b-form>
   </div>
 </template>
 
 <script>
-import { setCookie } from '@/cookie.js';
+  import App from '@/App.vue';
 
 const API_URL = process.env.API_URL || 'http://localhost:3000';
 
@@ -69,7 +69,7 @@ export default {
         this.user.senha = '';
         this.error = '';
 		    this.success = true;
-        setCookie("user", resultJSON["_id"], 7);
+        this.$setCookie('user', resultJSON["_id"], { expires: 7 });
         const rota = '/usuario/detalhar';
         this.$router.push({ path: rota });
       }

@@ -9,7 +9,6 @@
 <script>
 // @ is an alias to /src
 	import DetalheUsuario from '@/components/Usuarios/DetalheUsuario.vue';
-	import { getCookie } from '@/cookie.js';
 
 const API_URL = process.env.API_URL || 'http://localhost:3000';
 
@@ -24,7 +23,7 @@ export default {
     }
   },
 async created() {
-	const id = getCookie("user");
+	const id = this.$cookies.user;
     const result = await fetch(API_URL + '/usuarios/buscar?id=' + id, {
       method: 'GET',
       headers: {
