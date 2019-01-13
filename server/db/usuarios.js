@@ -1,5 +1,6 @@
 const Joi = require('joi')
 const db = require('./connection');
+const CryptoJS = require('crypto-js');
 
 const schema = Joi.object().keys({
 	email : Joi.string().required().email({ minDomainAtoms: 2 }).error(new Error('Email invalido.')),
@@ -33,12 +34,12 @@ function search(req) {
 
 function getAll() {
 	return usuarios.find({},
-						 {"senha": 0 });	
+						{"senha": 0 });	
 }
 
 function getOne(id) {
 	return usuarios.findOne({"_id": id},
-                  			{"senha": 0 });;	
+            				{"senha": 0 });;	
 }
 
 async function create(usuario) {
@@ -48,6 +49,7 @@ async function create(usuario) {
 		usuario.dataCriacao = agora;
 		usuario.ultimoAcesso = agora;
 		usuario.tipoUsuario = tipoUsuarioEnum.comum;
+		usuario.senha = CryptoJS.SHA256(usuario.senha).toString();
 		ret = await usuarios.insert(usuario);
 		delete ret["senha"];
 		return ret; 
@@ -89,6 +91,7 @@ async function login(req) {
 	if (!req._body || !req.body["email"] || !req.body["senha"]){
 		throw "Autenticação falhou.";
 	}
+	req.body.senha = CryptoJS.SHA256(req.body.senha).toString();
 	return await usuarios.findOneAndUpdate ({ "email": req.body["email"], "senha":req.body["senha"]}, 
 											{ $set: {"ultimoAcesso": new Date()}},
 											{ projection : {"senha": 0}});
