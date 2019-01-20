@@ -39,14 +39,16 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
+          <b-nav-item v-if="!this.$cookies.user" right href="/signup">Cadastre-se</b-nav-item>
+          <b-nav-item v-if="!this.$cookies.user" right href="/login">Login</b-nav-item>
 
-          <b-nav-item-dropdown right>
+          <b-nav-item-dropdown v-if="this.$cookies.user" right>
             <!-- Using button-content slot -->
             <template slot="button-content">
               <em>Conta</em>
             </template>
-            <b-dropdown-item href="#">Perfil</b-dropdown-item>
-            <b-dropdown-item href="#">Sair</b-dropdown-item>
+            <b-dropdown-item href="/usuario/detalhar">Perfil</b-dropdown-item>
+            <b-dropdown-item href="/logout">Sair</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
 
