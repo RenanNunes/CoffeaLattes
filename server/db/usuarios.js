@@ -50,9 +50,17 @@ async function create(usuario) {
 		usuario.ultimoAcesso = agora;
 		usuario.tipoUsuario = tipoUsuarioEnum.comum;
 		usuario.senha = CryptoJS.SHA256(usuario.senha).toString();
-		ret = await usuarios.insert(usuario);
-		delete ret["senha"];
-		return ret; 
+		try {
+			ret = await usuarios.insert(usuario);
+			delete ret["senha"];
+			return ret;
+		} catch(err) {
+			const erro = {
+				erro: true,
+				mensagem: "O e-mail inserido já está sendo utilizado =/",
+			}
+			return Promise.reject(erro);
+		}
 	} else {
 		const erro = {
 			erro: true,
