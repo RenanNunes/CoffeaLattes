@@ -5,10 +5,13 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "postinstall": "npm run build",
+    "start": "node server.js"
   },
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.14",
+    "express": "^4.16.4",
     "vue": "^2.5.17",
     "vue-reactive-cookie": "^1.0.4",
     "vue-router": "^3.0.1"
