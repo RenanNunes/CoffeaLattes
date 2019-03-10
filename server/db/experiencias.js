@@ -1,6 +1,7 @@
 const Joi = require('joi')
 const db = require('./connection');
 const ObjectID = require('mongodb').ObjectID;
+const jws = require('jws');
 
 const schema = Joi.object().keys({
 	cargo: Joi.string().max(75).required().error(new Error('Cargo pode conter até 75 caracteres')),
@@ -98,11 +99,22 @@ async function getOne(id, lookupReview) {
 	}
 }
 
-function create(exp) {
+function create(exp, token) {
 	//depois de fazer a lógica de criação de empresa, será necessário adicionar a lógica aqui para linkar com a experiência
+	if (!token || !jws.verify(token, 'HS256', process.env.SECRET || 'secret')){
+		const erro = {
+			erro: true,
+			mensagem: 'JWT Invalido',
+		}
+		return Promise.reject(erro);
+	}
+
+	const usuario = JSON.parse(jws.decode(token).payload);
+
 	const resultado = Joi.validate(exp, schema);
 	if (!resultado.error) {
 		exp.dataCriacao = new Date();
+		exp.usuario = new ObjectID(usuario['_id']);
 		return experiencias.insert(exp);
 	} else {
 		const erro = {
