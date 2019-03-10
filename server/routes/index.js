@@ -44,7 +44,7 @@ module.exports = function(app) {
 
 	app.post('/experiencia/criar', async (req, res) => {
 		try {
-			const result = await experiencias.create(req.body);
+			const result = await experiencias.create(req.body, req.headers.token);
 			res.json(result);
 		} catch (error) {
 			res.status(500);
