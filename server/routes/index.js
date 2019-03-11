@@ -190,7 +190,7 @@ module.exports = function(app) {
 
 	app.post('/usuarios/login', async (req, res) => {
 		try {
-            const result = await usuarios.login(req);
+			const result = await usuarios.login(req);
 			res.json(result);
 		} catch (error) {
 			res.status(500);
