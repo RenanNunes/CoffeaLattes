@@ -104,7 +104,7 @@ function create(exp, token) {
 	if (!token || !jws.verify(token, 'HS256', process.env.SECRET || 'secret')){
 		const erro = {
 			erro: true,
-			mensagem: 'JWT Invalido',
+			mensagem: 'Falha na autenticação',
 		}
 		return Promise.reject(erro);
 	}
