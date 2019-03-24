@@ -2,7 +2,7 @@
   <div id="app">
 
     <b-navbar toggleable="md" type="dark" variant="secondary">
-     <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
       <b-navbar-brand href="/">CoffeaLattes</b-navbar-brand>
 
       <b-collapse is-nav id="nav_collapse">
