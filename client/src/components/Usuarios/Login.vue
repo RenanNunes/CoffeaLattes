@@ -53,7 +53,8 @@ export default {
   methods: {
     async onSubmit(evt) {
       evt.preventDefault();
-      const result = await fetch(API_URL+'/usuarios/login', {
+      this.error = '';
+      const result = await fetch(API_URL+'/login', {
         method: 'POST',
         body: JSON.stringify(this.user),
         headers: {
@@ -61,8 +62,8 @@ export default {
         },
       });
       const resultJSON = await result.json();
-      if (resultJSON == null) {
-        this.error = "Algo deu errado";
+      if (resultJSON == null || resultJSON['error']) {
+        this.error = resultJSON['error'] || "Algo deu errado";
         this.success = '';
       } else {
         this.user.email = '';

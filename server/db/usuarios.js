@@ -40,7 +40,7 @@ function getAll() {
 
 function getOne(id) {
 	return usuarios.findOne({"_id": id},
-            				{"senha": 0 });;	
+													{"senha": 0 });;	
 }
 
 async function create(usuario) {
@@ -105,6 +105,11 @@ async function login(req) {
 		{ "email": req.body["email"], "senha":req.body["senha"]}, 
 		{ $set: {"ultimoAcesso": new Date()}},
 		{ projection : {"senha": 0}});
+	if (usuario == undefined){
+		return {
+			error: "Usuario ou senha não está correto"
+		}
+	}
 	const token = jws.sign({
 		header: {alg: 'HS256'},
 		payload: JSON.stringify(usuario),

@@ -138,17 +138,7 @@ module.exports = function(app) {
 		}
 	});
 
-	app.get('/usuarios', async (req, res) => {
-		try {
-			const result = await usuarios.getAll();
-			res.json(result);
-		} catch (error) {
-			res.status(500);
-			res.json(error);
-		}
-	});
-
-	app.get('/usuarios/buscar', async(req, res) => {
+	app.get('/usuarios', async(req, res) => {
 		try{
 			const result = await usuarios.search(req);
 			res.json(result);
@@ -158,7 +148,7 @@ module.exports = function(app) {
 		}
 	})
 
-	app.post('/usuarios/criar', async (req, res) => {
+	app.post('/usuarios', async (req, res) => {
 		try {
 			const result = await usuarios.create(req.body);
 			res.json(result);
@@ -168,7 +158,7 @@ module.exports = function(app) {
 		}
 	});
 
-	app.put('/usuarios/editar', async (req, res) => {
+	app.put('/usuarios', async (req, res) => {
 		try {
 			const result = await usuarios.update(req.body);
 			res.json(result);
@@ -178,7 +168,7 @@ module.exports = function(app) {
 		}
 	});
 
-	app.delete('/usuarios/remover', async (req, res) => {
+	app.delete('/usuarios', async (req, res) => {
 		try {
 			const result = await usuarios.remove(req);
 			res.json(result);
@@ -188,7 +178,7 @@ module.exports = function(app) {
 		}
 	});
 
-	app.post('/usuarios/login', async (req, res) => {
+	app.post('/login', async (req, res) => {
 		try {
 			const result = await usuarios.login(req);
 			res.json(result);

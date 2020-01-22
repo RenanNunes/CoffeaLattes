@@ -44,12 +44,12 @@ export default {
     },
     apagar() {
       const id = this.user && this.user._id;
-      fetch(API_URL + '/usuarios/remover?id=' + id, {
+      fetch(API_URL + '/usuarios?id=' + id, {
         method: 'DELETE',
         headers: {
           'content-type': 'application/json',
         },
-	  }).then(() => this.$router.push({ path: '/logout' }));
+    }).then(() => this.$router.push({ path: '/logout' }));
     },
   }
 }
