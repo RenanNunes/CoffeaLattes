@@ -12,7 +12,7 @@
         <b>Descrição: </b> {{emp.descricao}}
       </p>
       <p>
-            <b>Locais da empresa:</b> {{emp.localidades}}
+            <b>Locais da empresa:</b> <span v-for="local in emp.localidades"></br>{{local}}</span>
           </p>
         <p v-if="emp.areaDeAtuacao">
             <b>Área de atuação:</b> {{emp.areaDeAtuacao}}
@@ -50,7 +50,7 @@ export default {
     },
     apagar() {
       const id = this.emp && this.emp._id;
-      fetch(API_URL + '/empresa/remover?_id=' + id, {
+      fetch(API_URL + '/empresas?_id=' + id, {
         method: 'DELETE',
         headers: {
           'content-type': 'application/json',

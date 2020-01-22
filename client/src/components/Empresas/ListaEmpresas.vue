@@ -52,7 +52,7 @@ export default {
   methods:{
     async onStart() {
       /*evt.preventDefault();*/
-      const result = await fetch(API_URL+'/empresa/buscar', {
+      const result = await fetch(API_URL+'/empresas', {
         method: 'GET',
         headers: {
           'content-type': 'application/json',

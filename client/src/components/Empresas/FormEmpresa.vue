@@ -16,46 +16,42 @@
       
       
       <b-form-group id="localidadesLabel"
-                    label="localidades: *"
+                    label="Localidades:"
                     label-for="localidades">
         <b-form-textarea id="localidades"
                         v-model="emp.localidades"
                         placeholder="Onde a empresa fica? Use novas linhas para adicionar novos locais"
-                        required
                         :rows="3"
                         :max-rows="6">
         </b-form-textarea>
       </b-form-group>
 
       <b-form-group id="areaDeAtuacaoLabel"
-                    label="Área de atuação da empresa: *"
+                    label="Área de atuação da empresa:"
                     label-for="areaDeAtuacao">
         <b-form-input id="areaDeAtuacao"
                       type="text"
                       v-model="emp.areaDeAtuacao"
-                      required
                       placeholder="Qual é a área de atuação da empresa?">
         </b-form-input>
       </b-form-group>
 
       <b-form-group id="descricao"
-                    label="Descrição da empresa: *"
+                    label="Descrição da empresa:"
                     label-for="descricao">
         <b-form-input id="descricao"
                       type="text"
                       v-model="emp.descricao"
-                      required
                       placeholder="Forneça uma descrição mais detalhada sobre a empresa: O que ela faz? Quando foi fundada? Quais são os seus objetivos?">
         </b-form-input>
       </b-form-group>
 
       <b-form-group id="site"
-                    label="Site da empresa: *"
+                    label="Site da empresa:"
                     label-for="site">
         <b-form-input id="site"
                       type="text"
                       v-model="emp.site"
-                      required
                       placeholder="Ex.: www.exemplo.com.br">
         </b-form-input>
       </b-form-group>
@@ -97,8 +93,10 @@ export default {
   methods: {
     async onSubmit(evt) {
       evt.preventDefault();
+      this.error = '';
+      const auxLocalidades = this.emp.localidades;
       this.emp.localidades = this.emp.localidades.split(/\r?\n/);
-        const result = await fetch(API_URL+'/empresa/criar', {
+        const result = await fetch(API_URL+'/empresas', {
         method: 'POST',
         body: JSON.stringify(this.emp),
         headers: {
@@ -107,6 +105,7 @@ export default {
       });
       const resultJSON = await result.json();
       if (resultJSON.erro) {
+        this.emp.localidades = auxLocalidades;
         this.error = resultJSON.mensagem;
         this.success = '';
       } else {

@@ -24,7 +24,7 @@ export default {
   },
   async created() {
     const id = this.$route.params && this.$route.params.id;
-    const result = await fetch(API_URL + '/empresa/buscar?_id=' + id, {
+    const result = await fetch(API_URL + '/empresas?_id=' + id, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',

@@ -103,17 +103,12 @@ module.exports = function(app) {
 		}
 	})
 
-	app.get('/empresa', async (req, res)=> {
-		const emp = await empresas.getAll();
+	app.get('/empresas', async (req, res) => {
+		const emp = await empresas.search(req.query);
 		res.json(emp);
 	})
 
-	app.get('/empresa/buscar', async (req, res) => {
-		const emp = await empresas.getAll(req.query);
-		res.json(emp);
-	})
-
-	app.post('/empresa/criar', async (req, res) => {
+	app.post('/empresas', async (req, res) => {
 		try {
 			const result = await empresas.create(req.body);
 			res.json(result);
@@ -123,12 +118,12 @@ module.exports = function(app) {
 		}
 	});
 
-	app.delete('/empresa/remover', async (req, res) => {
+	app.delete('/empresas', async (req, res) => {
 		const emp = await empresas.remove(req.query);
 		res.json(emp);
 	});
 
-	app.post('/empresa/editar', async (req, res) => {
+	app.put('/empresas', async (req, res) => {
 		try {
 			const result = await empresas.update(req.query);
 			res.json(result);
