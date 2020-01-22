@@ -74,7 +74,7 @@ export default {
   methods: {
     async onSubmit(evt) {
       evt.preventDefault();
-      const result = await fetch(API_URL+'/usuarios/criar', {
+      const result = await fetch(API_URL+'/usuarios', {
         method: 'POST',
         body: JSON.stringify(this.user),
         headers: {

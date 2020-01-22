@@ -24,7 +24,7 @@ export default {
   },
 async created() {
 	const id = this.$cookies.user;
-    const result = await fetch(API_URL + '/usuarios/buscar?id=' + id, {
+    const result = await fetch(API_URL + '/usuarios?id=' + id, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -33,6 +33,8 @@ async created() {
     const resultJSON = await result.json();
     if (resultJSON && resultJSON._id) {
       this.user = resultJSON;
+      const date = new Date(resultJSON.dataCriacao);
+      this.user["dataCriacao"] = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() 
     }
     else {
       this.user = {
