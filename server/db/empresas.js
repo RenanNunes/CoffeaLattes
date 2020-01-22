@@ -29,10 +29,18 @@ function search(emp) {
     return empresas.find(emp);
 }
 
-function create(emp) {
+async function create(emp) {
 	//depois de fazer a lógica de criação de empresa, será necessário adicionar a lógica aqui para linkar com a experiência
     const resultado = Joi.validate(emp, schema);
 	if (!resultado.error) {
+        const result = await empresas.findOne({nome: emp["nome"]});
+        if (result){
+            const erro = {
+                erro: true,
+                mensagem: "Um empresa com esse nome já existe.",
+            }
+            return Promise.reject(erro);
+        }
 		return empresas.insert(emp);
 	} else {
 		const erro = {
