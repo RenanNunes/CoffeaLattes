@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import Sobre from './views/Sobre.vue';
 import CriarExperiencia from './views/CriarExperiencia.vue';
 import ListarExperiencia from './views/ListarExperiencia.vue';
 import CriarReview from './views/CriarReview.vue';
@@ -90,6 +91,11 @@ export default new Router({
       path: '/usuario/detalhar',
       name: 'detalharUsuario',
       component: DetalharUsuario,
+    },
+    {
+      path: '/sobre',
+      name: 'sobre',
+      component: Sobre,
     },
     {
       path: '*',

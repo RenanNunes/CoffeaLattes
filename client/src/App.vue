@@ -8,7 +8,7 @@
       <b-collapse is-nav id="nav_collapse">
 
         <b-navbar-nav>
-          <b-nav-item to="#">Sobre</b-nav-item>
+          <b-nav-item to="/sobre">Sobre</b-nav-item>
           <b-nav-item-dropdown right>
             <!-- Using button-content slot -->
             <template slot="button-content">
