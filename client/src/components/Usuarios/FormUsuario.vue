@@ -120,8 +120,9 @@ export default {
 }
 
 .form-user {
-  background-color: #f5f5f5;
+  background-color: #fcfcfc;
   padding: 15px;
-  border-radius: 5px;
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
 }
 </style>

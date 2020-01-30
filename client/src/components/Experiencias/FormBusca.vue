@@ -131,6 +131,6 @@ export default {
 }
 
 .form-exp{
-  background-color: #f5f5f5;
+  background-color: #fcfcfc;
 }
 </style>

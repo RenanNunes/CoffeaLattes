@@ -78,10 +78,10 @@ export default {
 }
 
 .form-review {
-  background-color: #f8f8f8;
+  background-color: #fcfcfc;
   padding: 15px;
-  border-radius: 5px;
-  margin-top: 15px;
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
 }
 
 .col{
